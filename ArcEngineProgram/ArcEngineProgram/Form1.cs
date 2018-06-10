@@ -26,5 +26,11 @@ namespace ArcEngineProgram
             FormSurvey formSurvey = new FormSurvey();
             formSurvey.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormContour formContour = new FormContour();
+            formContour.Show();
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace ArcEngineProgram
         private void 加载Shp文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "shp文件(*.shp)|*.shp";
-            openFileDialog1.Multiselect = false;
+            openFileDialog1.Multiselect = true;
             if (openFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
             string fileFullPath = openFileDialog1.FileName;
@@ -209,5 +209,111 @@ namespace ArcEngineProgram
 
             }
         }
+
+        private void 选择测区范围ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            flagSelectFeature = 选择测区范围ToolStripMenuItem.Checked;
+        }
+
+        private void axMapControl1_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
+        {
+            if (flagSelectFeature == true)
+            {
+                axMapControl1.Map.ClearSelection();
+                IGeometry geometry = axMapControl1.TrackRectangle();
+
+                //创建sptialFilter
+                ISpatialFilter spatialFilter = new SpatialFilterClass();
+                spatialFilter.Geometry = geometry;
+                spatialFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelIntersects;
+
+                ILayer pLayer = axMapControl1.get_Layer(0);
+                IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+                IFeatureClass pFClass = pFLayer.FeatureClass;
+                IFeatureCursor featureCursor = pFClass.Search(spatialFilter, true);
+                IFeature pFeature = featureCursor.NextFeature();
+                while (pFeature != null)
+                {
+                    axMapControl1.Map.SelectFeature(pLayer, pFeature);
+                    pFeature = featureCursor.NextFeature();
+                }
+                axMapControl1.Refresh();
+            }
+            else if (flagCreateFeature == true)
+            {
+                ILayer pLayer = axMapControl1.get_Layer(0);
+                IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+                IFeatureClass pFClass = pFLayer.FeatureClass;
+                IGeometry geometry = null;
+                switch (pFClass.ShapeType)
+                {
+                    case esriGeometryType.esriGeometryPoint:
+                        IPoint point = new PointClass();
+                        point.PutCoords(e.mapX, e.mapY);
+                        geometry = point as IGeometry;
+                        break;
+                    case esriGeometryType.esriGeometryPolygon:
+                        geometry = axMapControl1.TrackPolygon();
+                        break;
+                }
+                IFeature pFeature = pFClass.CreateFeature();
+                pFeature.Shape = geometry;
+                pFeature.Store();
+
+                axMapControl1.Refresh();
+                flagCreateFeature = false;
+            }
+        }
+
+        private void 图层上移ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            esriTOCControlItem pTocItem = new esriTOCControlItem();
+
+            ILayer pLayer = new FeatureLayerClass();
+            IBasicMap pBasicMap = new MapClass();
+            object obj1 = new object();
+            object obj2 = new object();
+            axTOCControl1.GetSelectedItem(ref pTocItem, ref pBasicMap, ref pLayer, ref obj1, ref obj2);
+            if (pTocItem == esriTOCControlItem.esriTOCControlItemLayer)
+            {
+                int iIndex;
+                for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
+                {
+                    if (axMapControl1.get_Layer(iIndex) == pLayer)
+                    {
+                        if (iIndex == 0) break;
+                        axMapControl1.MoveLayerTo(iIndex, iIndex - 1);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void 图层下移ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            esriTOCControlItem pTocItem = new esriTOCControlItem();
+
+            ILayer pLayer = new FeatureLayerClass();
+            IBasicMap pBasicMap = new MapClass();
+            object obj1 = new object();
+            object obj2 = new object();
+            axTOCControl1.GetSelectedItem(ref pTocItem, ref pBasicMap, ref pLayer, ref obj1, ref obj2);
+            if (pTocItem == esriTOCControlItem.esriTOCControlItemLayer)
+            {
+                int iIndex;
+                for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
+                {
+                    if (axMapControl1.get_Layer(iIndex) == pLayer)
+                    {
+                        if (iIndex == axMapControl1.LayerCount - 1) break;
+                        axMapControl1.MoveLayerTo(iIndex, iIndex + 1);
+                        pLayer.Visible = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        
     }
 }

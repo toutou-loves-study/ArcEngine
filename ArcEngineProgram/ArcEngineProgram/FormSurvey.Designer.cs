@@ -31,40 +31,41 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSurvey));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.加载Shp文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
-            this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
-            this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
-            this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除图层ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.选择测区范围ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
+            this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
+            this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
+            this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
+            this.图层上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.图层下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.文件ToolStripMenuItem});
+            this.文件ToolStripMenuItem,
+            this.选择ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1163, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // 文件ToolStripMenuItem
             // 
@@ -81,24 +82,9 @@
             this.加载Shp文件ToolStripMenuItem.Text = "添加shp文件";
             this.加载Shp文件ToolStripMenuItem.Click += new System.EventHandler(this.加载Shp文件ToolStripMenuItem_Click);
             // 
-            // axTOCControl1
+            // openFileDialog1
             // 
-            this.axTOCControl1.Location = new System.Drawing.Point(0, 61);
-            this.axTOCControl1.Name = "axTOCControl1";
-            this.axTOCControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axTOCControl1.OcxState")));
-            this.axTOCControl1.Size = new System.Drawing.Size(238, 496);
-            this.axTOCControl1.TabIndex = 2;
-            this.axTOCControl1.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.axTOCControl1_OnMouseDown);
-            this.axTOCControl1.OnMouseUp += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseUpEventHandler(this.axTOCControl1_OnMouseUp);
-            // 
-            // axToolbarControl1
-            // 
-            this.axToolbarControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.axToolbarControl1.Location = new System.Drawing.Point(0, 28);
-            this.axToolbarControl1.Name = "axToolbarControl1";
-            this.axToolbarControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axToolbarControl1.OcxState")));
-            this.axToolbarControl1.Size = new System.Drawing.Size(1163, 28);
-            this.axToolbarControl1.TabIndex = 3;
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // dataGridView1
             // 
@@ -118,6 +104,38 @@
             this.axLicenseControl1.Size = new System.Drawing.Size(32, 32);
             this.axLicenseControl1.TabIndex = 9;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除图层ToolStripMenuItem,
+            this.图层上移ToolStripMenuItem,
+            this.图层下移ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 98);
+            // 
+            // 删除图层ToolStripMenuItem
+            // 
+            this.删除图层ToolStripMenuItem.Name = "删除图层ToolStripMenuItem";
+            this.删除图层ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.删除图层ToolStripMenuItem.Text = "删除图层";
+            this.删除图层ToolStripMenuItem.Click += new System.EventHandler(this.删除图层ToolStripMenuItem_Click);
+            // 
+            // 选择ToolStripMenuItem
+            // 
+            this.选择ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.选择测区范围ToolStripMenuItem});
+            this.选择ToolStripMenuItem.Name = "选择ToolStripMenuItem";
+            this.选择ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.选择ToolStripMenuItem.Text = "选择";
+            // 
+            // 选择测区范围ToolStripMenuItem
+            // 
+            this.选择测区范围ToolStripMenuItem.CheckOnClick = true;
+            this.选择测区范围ToolStripMenuItem.Name = "选择测区范围ToolStripMenuItem";
+            this.选择测区范围ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.选择测区范围ToolStripMenuItem.Text = "选择测区范围";
+            this.选择测区范围ToolStripMenuItem.Click += new System.EventHandler(this.选择测区范围ToolStripMenuItem_Click);
+            // 
             // axMapControl2
             // 
             this.axMapControl2.Location = new System.Drawing.Point(0, 563);
@@ -126,6 +144,25 @@
             this.axMapControl2.Size = new System.Drawing.Size(238, 232);
             this.axMapControl2.TabIndex = 7;
             // 
+            // axToolbarControl1
+            // 
+            this.axToolbarControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.axToolbarControl1.Location = new System.Drawing.Point(0, 28);
+            this.axToolbarControl1.Name = "axToolbarControl1";
+            this.axToolbarControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axToolbarControl1.OcxState")));
+            this.axToolbarControl1.Size = new System.Drawing.Size(1163, 28);
+            this.axToolbarControl1.TabIndex = 3;
+            // 
+            // axTOCControl1
+            // 
+            this.axTOCControl1.Location = new System.Drawing.Point(0, 61);
+            this.axTOCControl1.Name = "axTOCControl1";
+            this.axTOCControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axTOCControl1.OcxState")));
+            this.axTOCControl1.Size = new System.Drawing.Size(238, 496);
+            this.axTOCControl1.TabIndex = 2;
+            this.axTOCControl1.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.axTOCControl1_OnMouseDown);
+            this.axTOCControl1.OnMouseUp += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseUpEventHandler(this.axTOCControl1_OnMouseUp);
+            // 
             // axMapControl1
             // 
             this.axMapControl1.Location = new System.Drawing.Point(244, 61);
@@ -133,21 +170,22 @@
             this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
             this.axMapControl1.Size = new System.Drawing.Size(919, 496);
             this.axMapControl1.TabIndex = 1;
+            this.axMapControl1.OnMouseDown += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseDownEventHandler(this.axMapControl1_OnMouseDown);
             this.axMapControl1.OnExtentUpdated += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnExtentUpdatedEventHandler(this.axMapControl1_OnExtentUpdated);
             // 
-            // contextMenuStrip1
+            // 图层上移ToolStripMenuItem
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除图层ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(139, 28);
+            this.图层上移ToolStripMenuItem.Name = "图层上移ToolStripMenuItem";
+            this.图层上移ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.图层上移ToolStripMenuItem.Text = "图层上移";
+            this.图层上移ToolStripMenuItem.Click += new System.EventHandler(this.图层上移ToolStripMenuItem_Click);
             // 
-            // 删除图层ToolStripMenuItem
+            // 图层下移ToolStripMenuItem
             // 
-            this.删除图层ToolStripMenuItem.Name = "删除图层ToolStripMenuItem";
-            this.删除图层ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
-            this.删除图层ToolStripMenuItem.Text = "删除图层";
-            this.删除图层ToolStripMenuItem.Click += new System.EventHandler(this.删除图层ToolStripMenuItem_Click);
+            this.图层下移ToolStripMenuItem.Name = "图层下移ToolStripMenuItem";
+            this.图层下移ToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.图层下移ToolStripMenuItem.Text = "图层下移";
+            this.图层下移ToolStripMenuItem.Click += new System.EventHandler(this.图层下移ToolStripMenuItem_Click);
             // 
             // FormSurvey
             // 
@@ -165,13 +203,13 @@
             this.Text = "FormSurvey";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,5 +229,9 @@
         private ESRI.ArcGIS.Controls.AxLicenseControl axLicenseControl1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 删除图层ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 选择ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 选择测区范围ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 图层上移ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 图层下移ToolStripMenuItem;
     }
 }
