@@ -41,7 +41,7 @@
             this.button1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.button1.Location = new System.Drawing.Point(96, 120);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(191, 149);
+            this.button1.Size = new System.Drawing.Size(219, 149);
             this.button1.TabIndex = 0;
             this.button1.Text = "测量辅助系统";
             this.button1.UseVisualStyleBackColor = false;
@@ -54,7 +54,7 @@
             this.button2.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.button2.Location = new System.Drawing.Point(415, 120);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(191, 149);
+            this.button2.Size = new System.Drawing.Size(223, 149);
             this.button2.TabIndex = 1;
             this.button2.Text = "生成等高线";
             this.button2.UseVisualStyleBackColor = false;
@@ -69,6 +69,16 @@
             this.button3.Size = new System.Drawing.Size(115, 50);
             this.button3.TabIndex = 2;
             this.button3.Text = " 关闭(&C)";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.button3.Location = new System.Drawing.Point(563, 321);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "退出";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // Form1
