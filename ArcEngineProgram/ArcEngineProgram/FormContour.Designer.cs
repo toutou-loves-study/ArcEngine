@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(778, 506);
             this.Name = "FormContour";
             this.Text = "FormContour";
+            this.Load += new System.EventHandler(this.FormContour_Load);
             this.ResumeLayout(false);
 
         }

@@ -15,5 +15,10 @@ namespace ArcEngineProgram
         {
             InitializeComponent();
         }
+
+        private void FormContour_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
