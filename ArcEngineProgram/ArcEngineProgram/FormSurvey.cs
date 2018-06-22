@@ -20,8 +20,17 @@ namespace ArcEngineProgram
         bool flagSelectFeature = false;
         bool flagCreateFeature = false;
 
-        IPoint firstPoint;
 
+        public IColor Color2IColor(Color color)
+        {
+
+            IColor pColor = new RgbColorClass();
+
+            pColor.RGB = color.B * 65536 + color.G * 256 + color.R;
+
+            return pColor;
+
+        }
         ILayer pMovelayer;
 
         public FormSurvey()
@@ -390,14 +399,13 @@ namespace ArcEngineProgram
                     IGeoFeatureLayer geoFeatureLayer = pLayer as IGeoFeatureLayer;
                     SimpleRenderer simpleRender = new SimpleRendererClass();
                     ISimpleMarkerSymbol pMarkerSymbol;
-                    IColor color;
-                    color = new RgbColorClass();
-                    color.RGB = 200;
+                    Color mycolor = Color.FromArgb(0, 205, 133, 63);
+                    IColor color = Color2IColor(mycolor);
                     pMarkerSymbol = new SimpleMarkerSymbolClass();
                     pMarkerSymbol.Style = esriSimpleMarkerStyle.esriSMSX;
                     pMarkerSymbol.Color = color;
                     pMarkerSymbol.Angle = 60;
-                    pMarkerSymbol.Size = 10;
+                    pMarkerSymbol.Size = 6;
                     simpleRender.Symbol = pMarkerSymbol as ISymbol;
                     geoFeatureLayer.Renderer = simpleRender as IFeatureRenderer;
                     axMapControl1.Refresh();
@@ -411,7 +419,7 @@ namespace ArcEngineProgram
             IEnumFeature pEnumFeature = (IEnumFeature)pSeletion;
 
             IFeature pFeature = pEnumFeature.Next();
-            while (pFeature != null)
+            while (pFeature != null && pFeature.Shape.GeometryType==esriGeometryType.esriGeometryPoint)
             {
                 pFeature.Delete();
                 pFeature = pEnumFeature.Next();
