@@ -1,5 +1,5 @@
 %!TEX program = xelatex
-\documentclass[twoside,color=blue,mathpazo,titlestyle=hang,10pt]{elegantbook}
+\documentclass[twoside,color=blue,mathpazo,titlestyle=hang,12pt]{elegantbook}
 % \email{elegantlatex2e@gmail.com}
 % \title{统计观点下的测量平差}
 % \zhtitle{统计观点下的测量平差}
@@ -103,8 +103,35 @@ language=Matlab}
 
 \mainmatter
 
+\chapter{构思}
 
+本程序分为三个部分，一是主界面，二是shp部分，第三是等高线部分。
 
+\begin{enumerate}
+\item 界面
+\item shp部分（数据集 控制点shp+polygon shp）
+\begin{enumerate}
+\item 鹰眼功能
+\item 拉框选择测区范围，在图上显示该测区所有控制点
+\item 选中某一控制点 给出可用的后视点 （遮蔽问题 满足一定距离）
+\item 选中某一控制点 给出测区范围     （缓冲区 遮蔽问题）
+\item 添加控制点 方式 输入坐标
+\end{enumerate}
+\item 等高线部分
+\begin{enumerate}
+\item 建TIN
+\item TIN转栅格
+\item 生成等高线
+\end{enumerate}
+\end{enumerate}
+   
+
+\chapter{小组特色}
+
+本小组通过不断学习尝试，实现了如下特色功能：
+\begin{enumerate}
+\item 鼠标拖拽使图层上下移动
+\end{enumerate}
 
 % \bibliographystyle{plainnat}
 % \bibliography{reference}
