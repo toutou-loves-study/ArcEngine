@@ -35,6 +35,12 @@
             this.加载Shp文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择测区范围ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.坐标添加控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.更换控制点符号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
@@ -42,16 +48,10 @@
             this.删除图层ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图层上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图层下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.添加控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.更换控制点符号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
-            this.删除控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.坐标添加控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
@@ -106,6 +106,52 @@
             this.选择测区范围ToolStripMenuItem.Text = "选择测区范围";
             this.选择测区范围ToolStripMenuItem.Click += new System.EventHandler(this.选择测区范围ToolStripMenuItem_Click);
             // 
+            // 编辑ToolStripMenuItem
+            // 
+            this.编辑ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加控制点ToolStripMenuItem,
+            this.坐标添加控制点ToolStripMenuItem,
+            this.删除控制点ToolStripMenuItem,
+            this.更换控制点符号ToolStripMenuItem});
+            this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
+            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.编辑ToolStripMenuItem.Text = "编辑";
+            // 
+            // 添加控制点ToolStripMenuItem
+            // 
+            this.添加控制点ToolStripMenuItem.CheckOnClick = true;
+            this.添加控制点ToolStripMenuItem.Name = "添加控制点ToolStripMenuItem";
+            this.添加控制点ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.添加控制点ToolStripMenuItem.Text = "添加控制点";
+            this.添加控制点ToolStripMenuItem.Click += new System.EventHandler(this.添加控制点ToolStripMenuItem_Click);
+            // 
+            // 坐标添加控制点ToolStripMenuItem
+            // 
+            this.坐标添加控制点ToolStripMenuItem.Name = "坐标添加控制点ToolStripMenuItem";
+            this.坐标添加控制点ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.坐标添加控制点ToolStripMenuItem.Text = "坐标添加控制点";
+            this.坐标添加控制点ToolStripMenuItem.Click += new System.EventHandler(this.坐标添加控制点ToolStripMenuItem_Click);
+            // 
+            // 删除控制点ToolStripMenuItem
+            // 
+            this.删除控制点ToolStripMenuItem.Name = "删除控制点ToolStripMenuItem";
+            this.删除控制点ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.删除控制点ToolStripMenuItem.Text = "删除控制点";
+            this.删除控制点ToolStripMenuItem.Click += new System.EventHandler(this.删除控制点ToolStripMenuItem_Click);
+            // 
+            // 更换控制点符号ToolStripMenuItem
+            // 
+            this.更换控制点符号ToolStripMenuItem.Name = "更换控制点符号ToolStripMenuItem";
+            this.更换控制点符号ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.更换控制点符号ToolStripMenuItem.Text = "更换控制点符号";
+            this.更换控制点符号ToolStripMenuItem.Click += new System.EventHandler(this.更换控制点符号ToolStripMenuItem_Click);
+            // 
+            // 查询ToolStripMenuItem
+            // 
+            this.查询ToolStripMenuItem.Name = "查询ToolStripMenuItem";
+            this.查询ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.查询ToolStripMenuItem.Text = "查询";
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -158,32 +204,6 @@
             this.图层下移ToolStripMenuItem.Text = "图层下移";
             this.图层下移ToolStripMenuItem.Click += new System.EventHandler(this.图层下移ToolStripMenuItem_Click);
             // 
-            // 编辑ToolStripMenuItem
-            // 
-            this.编辑ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.添加控制点ToolStripMenuItem,
-            this.坐标添加控制点ToolStripMenuItem,
-            this.删除控制点ToolStripMenuItem,
-            this.更换控制点符号ToolStripMenuItem});
-            this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
-            this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
-            this.编辑ToolStripMenuItem.Text = "编辑";
-            // 
-            // 添加控制点ToolStripMenuItem
-            // 
-            this.添加控制点ToolStripMenuItem.CheckOnClick = true;
-            this.添加控制点ToolStripMenuItem.Name = "添加控制点ToolStripMenuItem";
-            this.添加控制点ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.添加控制点ToolStripMenuItem.Text = "添加控制点";
-            this.添加控制点ToolStripMenuItem.Click += new System.EventHandler(this.添加控制点ToolStripMenuItem_Click);
-            // 
-            // 更换控制点符号ToolStripMenuItem
-            // 
-            this.更换控制点符号ToolStripMenuItem.Name = "更换控制点符号ToolStripMenuItem";
-            this.更换控制点符号ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.更换控制点符号ToolStripMenuItem.Text = "更换控制点符号";
-            this.更换控制点符号ToolStripMenuItem.Click += new System.EventHandler(this.更换控制点符号ToolStripMenuItem_Click);
-            // 
             // axMapControl2
             // 
             this.axMapControl2.Location = new System.Drawing.Point(0, 563);
@@ -221,26 +241,6 @@
             this.axMapControl1.TabIndex = 1;
             this.axMapControl1.OnMouseDown += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseDownEventHandler(this.axMapControl1_OnMouseDown);
             this.axMapControl1.OnExtentUpdated += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnExtentUpdatedEventHandler(this.axMapControl1_OnExtentUpdated);
-            // 
-            // 删除控制点ToolStripMenuItem
-            // 
-            this.删除控制点ToolStripMenuItem.Name = "删除控制点ToolStripMenuItem";
-            this.删除控制点ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.删除控制点ToolStripMenuItem.Text = "删除控制点";
-            this.删除控制点ToolStripMenuItem.Click += new System.EventHandler(this.删除控制点ToolStripMenuItem_Click);
-            // 
-            // 查询ToolStripMenuItem
-            // 
-            this.查询ToolStripMenuItem.Name = "查询ToolStripMenuItem";
-            this.查询ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
-            this.查询ToolStripMenuItem.Text = "查询";
-            // 
-            // 坐标添加控制点ToolStripMenuItem
-            // 
-            this.坐标添加控制点ToolStripMenuItem.Name = "坐标添加控制点ToolStripMenuItem";
-            this.坐标添加控制点ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.坐标添加控制点ToolStripMenuItem.Text = "坐标添加控制点";
-            this.坐标添加控制点ToolStripMenuItem.Click += new System.EventHandler(this.坐标添加控制点ToolStripMenuItem_Click);
             // 
             // FormSurvey
             // 
