@@ -19,6 +19,7 @@ namespace ArcEngineProgram
     {
         bool flagSelectFeature = false;
         bool flagCreateFeature = false;
+        IPoint firstPoint;
 
         ILayer pMovelayer;
 
@@ -66,7 +67,7 @@ namespace ArcEngineProgram
         private void 加载Shp文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "shp文件(*.shp)|*.shp";
-            openFileDialog1.Multiselect = false;
+            openFileDialog1.Multiselect = true;
             if (openFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
             string fileFullPath = openFileDialog1.FileName;
@@ -176,6 +177,7 @@ namespace ArcEngineProgram
 
         private void axTOCControl1_OnMouseUp(object sender, ITOCControlEvents_OnMouseUpEvent e)
         {
+
             if (e.button == 1 && pMovelayer != null)
             {
                 esriTOCControlItem item = esriTOCControlItem.esriTOCControlItemNone;
@@ -210,9 +212,190 @@ namespace ArcEngineProgram
             }
         }
 
+<<<<<<< HEAD
         private void axMapControl1_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
         {
 
+=======
+        private void 选择测区范围ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            flagSelectFeature = 选择测区范围ToolStripMenuItem.Checked;
+        }
+
+        private void axMapControl1_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
+        {
+            if (flagSelectFeature == true)
+            {
+                axMapControl1.Map.ClearSelection();
+                IGeometry geometry = axMapControl1.TrackRectangle();
+                firstPoint = new ESRI.ArcGIS.Geometry.Point();
+                firstPoint.X = e.mapX;
+                firstPoint.Y = e.mapY;
+                //创建sptialFilter
+                ISpatialFilter spatialFilter = new SpatialFilterClass();
+                spatialFilter.Geometry = geometry;
+                spatialFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelIntersects;
+
+                ILayer pLayer = axMapControl1.get_Layer(0);
+                IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+                IFeatureClass pFClass = pFLayer.FeatureClass;
+                IFeatureCursor featureCursor = pFClass.Search(spatialFilter, true);
+                IFeature pFeature = featureCursor.NextFeature();
+                while (pFeature != null)
+                {
+                    axMapControl1.Map.SelectFeature(pLayer, pFeature);
+                    pFeature = featureCursor.NextFeature();
+                }
+                axMapControl1.Refresh();
+            }
+            else if (flagCreateFeature == true)
+            {
+                ILayer pLayer = axMapControl1.get_Layer(0);
+                IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+                IFeatureClass pFClass = pFLayer.FeatureClass;
+                IGeometry geometry = null;
+                switch (pFClass.ShapeType)
+                {
+                    case esriGeometryType.esriGeometryPoint:
+                        IPoint point = new PointClass();
+                        point.PutCoords(e.mapX, e.mapY);
+                        geometry = point as IGeometry;
+                        break;
+                    case esriGeometryType.esriGeometryPolygon:
+                        geometry = axMapControl1.TrackPolygon();
+                        break;
+                }
+                IFeature pFeature = pFClass.CreateFeature();
+                pFeature.Shape = geometry;
+                pFeature.Store();
+
+                axMapControl1.Refresh();
+                flagCreateFeature = false;
+            }
+        }
+
+        private void 图层上移ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            esriTOCControlItem pTocItem = new esriTOCControlItem();
+
+            ILayer pLayer = new FeatureLayerClass();
+            IBasicMap pBasicMap = new MapClass();
+            object obj1 = new object();
+            object obj2 = new object();
+            axTOCControl1.GetSelectedItem(ref pTocItem, ref pBasicMap, ref pLayer, ref obj1, ref obj2);
+            if (pTocItem == esriTOCControlItem.esriTOCControlItemLayer)
+            {
+                int iIndex;
+                for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
+                {
+                    if (axMapControl1.get_Layer(iIndex) == pLayer)
+                    {
+                        if (iIndex == 0) break;
+                        axMapControl1.MoveLayerTo(iIndex, iIndex - 1);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void 图层下移ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            esriTOCControlItem pTocItem = new esriTOCControlItem();
+
+            ILayer pLayer = new FeatureLayerClass();
+            IBasicMap pBasicMap = new MapClass();
+            object obj1 = new object();
+            object obj2 = new object();
+            axTOCControl1.GetSelectedItem(ref pTocItem, ref pBasicMap, ref pLayer, ref obj1, ref obj2);
+            if (pTocItem == esriTOCControlItem.esriTOCControlItemLayer)
+            {
+                int iIndex;
+                for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
+                {
+                    if (axMapControl1.get_Layer(iIndex) == pLayer)
+                    {
+                        if (iIndex == axMapControl1.LayerCount - 1) break;
+                        axMapControl1.MoveLayerTo(iIndex, iIndex + 1);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void 添加控制点ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            flagCreateFeature = 添加控制点ToolStripMenuItem.Checked;
+        }
+
+        private void 更换控制点符号ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IFeatureLayer layer;
+            layer = (IFeatureLayer)axMapControl1.get_Layer(0);
+            IGeoFeatureLayer geoFeatureLayer = layer as IGeoFeatureLayer;
+            SimpleRenderer simpleRender = new SimpleRendererClass();
+            ISimpleMarkerSymbol pMarkerSymbol;
+            IColor color;
+            color = new RgbColorClass();
+            color.RGB = 200;
+            pMarkerSymbol = new SimpleMarkerSymbolClass();
+            pMarkerSymbol.Style = esriSimpleMarkerStyle.esriSMSX;
+            pMarkerSymbol.Color = color;
+            pMarkerSymbol.Angle = 60;
+            pMarkerSymbol.Size = 10;
+            simpleRender.Symbol = pMarkerSymbol as ISymbol;
+            geoFeatureLayer.Renderer = simpleRender as IFeatureRenderer;
+            axMapControl1.Refresh();
+        }
+
+        private void 删除控制点ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ISelection pSeletion = axMapControl1.Map.FeatureSelection;
+            IEnumFeature pEnumFeature = (IEnumFeature)pSeletion;
+
+            IFeature pFeature = pEnumFeature.Next();
+            while (pFeature != null)
+            {
+                pFeature.Delete();
+                pFeature = pEnumFeature.Next();
+            }
+            axMapControl1.Refresh();
+        }
+
+        private void axMapControl2_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
+        {
+            IPoint point = new PointClass();
+            point.X = e.mapX;
+            point.Y = e.mapY;
+        }
+
+        private void 坐标添加控制点ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormControlPoints Acp = new FormControlPoints();
+            if (Acp.ShowDialog() == DialogResult.OK)
+            {
+                int iIndex;
+                for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
+                {
+
+                    ILayer pLayer = axMapControl1.get_Layer(iIndex);
+                    IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+                    IFeatureClass pFClass = pFLayer.FeatureClass;
+                    IGeometry geometry = null;
+
+                    if (pFClass.ShapeType == esriGeometryType.esriGeometryPoint)
+                    {
+                        IPoint point = new PointClass();
+                        point.PutCoords(GlobalData.x, GlobalData.y);
+                        geometry = point as IGeometry;
+                        IFeature pFeature = pFClass.CreateFeature();
+                        pFeature.Shape = geometry;
+                        pFeature.Store();
+
+                        axMapControl1.Refresh();
+                    }
+                }
+            }
+>>>>>>> ef739aea0562ce3c19c2d30875fc3f05198de9ae
         }
     }
 }
