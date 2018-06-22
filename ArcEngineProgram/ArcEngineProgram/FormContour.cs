@@ -31,6 +31,7 @@ namespace ArcEngineProgram
         public FormContour()
         {
             InitializeComponent();
+            toolStripStatusLabel1.Text = "";
         }
 
         private List<Point3D> Read_ContourLineFile(string FileName)
@@ -75,8 +76,8 @@ namespace ArcEngineProgram
             IGeometryDefEdit pGDefEdit = (IGeometryDefEdit)pGeometryDef;
             pGDefEdit.GeometryType_2 = esriGeometryType.esriGeometryPoint;
 
-            pFieldEdit.GeometryDef_2 = pGeometryDef;
             pFieldsEdit.AddField(pField);
+            pFieldEdit.GeometryDef_2 = pGeometryDef;
 
             IFeatureClass pFeatureClass;
             pFeatureClass = shpFWS.CreateFeatureClass(filename, pFields, null, null, esriFeatureType.esriFTSimple, "Shape", "");
@@ -105,11 +106,17 @@ namespace ArcEngineProgram
             if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
             string fileFullPath = openFileDialog1.FileName;
             List<Point3D> ContourPointList = new List<Point3D>();
+            toolStripStatusLabel1.Text = "正在读取pnt文件...";
             ContourPointList = Read_ContourLineFile(fileFullPath);
+            toolStripStatusLabel1.Text = "正在创建shp文件...";
             IFeatureLayer ContourFeatureLayer = CreateSHP_Point(ContourPointList, fileFullPath);
+            toolStripStatusLabel1.Text = "读取完毕，共" + ContourPointList.Count().ToString() + "个高程点";
             axMapControl1.AddLayer(ContourFeatureLayer);
             axMapControl1.Refresh();
         }
+
+      
+     
 
        
        

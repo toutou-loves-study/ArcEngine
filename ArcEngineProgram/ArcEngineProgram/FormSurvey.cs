@@ -209,5 +209,10 @@ namespace ArcEngineProgram
 
             }
         }
+
+        private void axMapControl1_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
+        {
+
+        }
     }
 }
