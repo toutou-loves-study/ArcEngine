@@ -431,10 +431,11 @@ namespace ArcEngineProgram
                     IGeoFeatureLayer geoFeatureLayer = pLayer as IGeoFeatureLayer;
                     SimpleRenderer simpleRender = new SimpleRendererClass();
                     ISimpleMarkerSymbol pMarkerSymbol;
-                    Color mycolor = Color.FromArgb(0, 205, 133, 63);
+                    Random rd = new Random();
+                    Color mycolor = Color.FromArgb(0, rd.Next(0,256), rd.Next(0,256), rd.Next(0,256));
                     IColor color = Color2IColor(mycolor);
                     pMarkerSymbol = new SimpleMarkerSymbolClass();
-                    pMarkerSymbol.Style = esriSimpleMarkerStyle.esriSMSX;
+                    pMarkerSymbol.Style = (esriSimpleMarkerStyle)rd.Next(0, 5);
                     pMarkerSymbol.Color = color;
                     pMarkerSymbol.Angle = 60;
                     pMarkerSymbol.Size = 6;
@@ -499,6 +500,94 @@ namespace ArcEngineProgram
         {
             axMapControl1.CurrentTool = null;
             flagSelectStation = true;
+        }
+
+        private void dToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IGeometry buffer;
+            ISelection pSeletion = axMapControl1.Map.FeatureSelection;
+            IEnumFeature pEnumFeature = (IEnumFeature)pSeletion;
+            IGraphicsContainer graphicsContainer = axMapControl1.ActiveView.GraphicsContainer;
+            graphicsContainer.DeleteAllElements();
+            IFeature pFeature = pEnumFeature.Next();//自己
+            double bufferDistance = GlobalData.dist;
+            if (bufferDistance <= 0.0)
+            {
+                MessageBox.Show("距离设置错误");
+                return;
+            }
+            if(pFeature != null)
+            {
+                axMapControl1.Map.ClearSelection();
+                ITopologicalOperator topoOperator = pFeature.Shape as ITopologicalOperator;
+                buffer = topoOperator.Buffer(bufferDistance);
+                ISpatialFilter spatilaFilter = new SpatialFilterClass();
+                spatilaFilter.Geometry = buffer;
+                spatilaFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelContains;
+                int iIndex;
+                for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
+                {
+                    ILayer pLayer = axMapControl1.get_Layer(iIndex);
+                    IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+                    IFeatureClass pFClass = pFLayer.FeatureClass;
+                    if (pFClass.ShapeType == esriGeometryType.esriGeometryPoint)
+                    {
+                        //IWorkspaceFactory pWSF=new 
+
+                        IFeatureCursor featureCursor = pFClass.Search(spatilaFilter, true);
+                        IFeature oFeature = featureCursor.NextFeature();
+                        while (oFeature != null)
+                        {
+                            if(oFeature.OID!=pFeature.OID)
+                                axMapControl1.Map.SelectFeature(pLayer, oFeature);//找出处自己之外的伙伴
+                            oFeature = featureCursor.NextFeature();
+                        }
+                        break;
+                        
+                    }
+
+                }
+
+
+                axMapControl1.Refresh();
+            }
+
+
+        }
+
+        private void 输入仪器ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDistance fd = new FormDistance();
+            fd.ShowDialog();
+    
+        }
+
+        private void 给出可测区域ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IGeometry buffer;
+            ISelection pSeletion = axMapControl1.Map.FeatureSelection;
+            IEnumFeature pEnumFeature = (IEnumFeature)pSeletion;
+            IGraphicsContainer graphicsContainer = axMapControl1.ActiveView.GraphicsContainer;
+            graphicsContainer.DeleteAllElements();
+            IFeature pFeature = pEnumFeature.Next();
+            double bufferDistance = GlobalData.dist;
+            if (bufferDistance <= 0.0)
+            {
+                MessageBox.Show("距离设置错误");
+                return;
+            }
+
+
+            while (pFeature != null)
+            {
+                ITopologicalOperator topoOperator = pFeature.Shape as ITopologicalOperator;
+                buffer = topoOperator.Buffer(bufferDistance);
+                IElement element = new PolygonElementClass();
+                element.Geometry = buffer;
+                graphicsContainer.AddElement(element, 0);
+                pFeature = pEnumFeature.Next();
+            }
+            axMapControl1.Refresh();
         }
     }
 }

@@ -97,6 +97,12 @@
     <Compile Include="FormContour.Designer.cs">
       <DependentUpon>FormContour.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDistance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDistance.Designer.cs">
+      <DependentUpon>FormDistance.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSurvey.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormContour.resx">
       <DependentUpon>FormContour.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDistance.resx">
+      <DependentUpon>FormDistance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSurvey.resx">
       <DependentUpon>FormSurvey.cs</DependentUpon>
