@@ -41,6 +41,7 @@
             this.删除控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更换控制点符号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
@@ -52,6 +53,8 @@
             this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
+            this.给出可测区域ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.选择当前测站ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
@@ -93,7 +96,8 @@
             // 选择ToolStripMenuItem
             // 
             this.选择ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.选择测区范围ToolStripMenuItem});
+            this.选择测区范围ToolStripMenuItem,
+            this.选择当前测站ToolStripMenuItem});
             this.选择ToolStripMenuItem.Name = "选择ToolStripMenuItem";
             this.选择ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
             this.选择ToolStripMenuItem.Text = "选择";
@@ -148,9 +152,18 @@
             // 
             // 查询ToolStripMenuItem
             // 
+            this.查询ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dToolStripMenuItem,
+            this.给出可测区域ToolStripMenuItem});
             this.查询ToolStripMenuItem.Name = "查询ToolStripMenuItem";
-            this.查询ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
-            this.查询ToolStripMenuItem.Text = "查询";
+            this.查询ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.查询ToolStripMenuItem.Text = "空间分析";
+            // 
+            // dToolStripMenuItem
+            // 
+            this.dToolStripMenuItem.Name = "dToolStripMenuItem";
+            this.dToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.dToolStripMenuItem.Text = "给出可用后视点";
             // 
             // openFileDialog1
             // 
@@ -242,6 +255,20 @@
             this.axMapControl1.OnMouseDown += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseDownEventHandler(this.axMapControl1_OnMouseDown);
             this.axMapControl1.OnExtentUpdated += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnExtentUpdatedEventHandler(this.axMapControl1_OnExtentUpdated);
             // 
+            // 给出可测区域ToolStripMenuItem
+            // 
+            this.给出可测区域ToolStripMenuItem.Name = "给出可测区域ToolStripMenuItem";
+            this.给出可测区域ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.给出可测区域ToolStripMenuItem.Text = "给出可测区域";
+            // 
+            // 选择当前测站ToolStripMenuItem
+            // 
+            this.选择当前测站ToolStripMenuItem.CheckOnClick = true;
+            this.选择当前测站ToolStripMenuItem.Name = "选择当前测站ToolStripMenuItem";
+            this.选择当前测站ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.选择当前测站ToolStripMenuItem.Text = "选择当前测站";
+            this.选择当前测站ToolStripMenuItem.Click += new System.EventHandler(this.选择当前测站ToolStripMenuItem_Click);
+            // 
             // FormSurvey
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -295,5 +322,8 @@
         private System.Windows.Forms.ToolStripMenuItem 删除控制点ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 坐标添加控制点ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 查询ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 选择当前测站ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 给出可测区域ToolStripMenuItem;
     }
 }

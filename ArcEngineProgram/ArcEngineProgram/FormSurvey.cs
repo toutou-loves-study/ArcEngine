@@ -19,7 +19,7 @@ namespace ArcEngineProgram
     {
         bool flagSelectFeature = false;
         bool flagCreateFeature = false;
-
+        bool flagSelectStation = false;
 
         public IColor Color2IColor(Color color)
         {
@@ -224,6 +224,7 @@ namespace ArcEngineProgram
 
         private void 选择测区范围ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            axMapControl1.CurrentTool = null;
             flagSelectFeature = 选择测区范围ToolStripMenuItem.Checked;
         }
 
@@ -303,6 +304,8 @@ namespace ArcEngineProgram
                         axMapControl1.Refresh();
                     }
                 }
+                flagSelectFeature = false;
+                选择测区范围ToolStripMenuItem.Checked = false;
 
             }
             else if (flagCreateFeature == true) //创建实体
@@ -325,8 +328,37 @@ namespace ArcEngineProgram
 
                             axMapControl1.Refresh();
                             flagCreateFeature = false;
+                            删除控制点ToolStripMenuItem.Checked = false;
                     }
 
+                }
+            }
+            else if (flagSelectStation == true)
+            {
+                axMapControl1.Map.ClearSelection();
+                IGeometry geometry = axMapControl1.TrackCircle();
+                ISpatialFilter spatialFilter = new SpatialFilter();
+                spatialFilter.Geometry = geometry;
+                spatialFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelContains;
+                int iIndex;
+                for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
+                {
+                    ILayer pLayer = axMapControl1.get_Layer(iIndex);
+                    IFeatureLayer pFLayer = pLayer as IFeatureLayer;
+                    IFeatureClass pFClass = pFLayer.FeatureClass;
+                    if (pFClass.ShapeType == esriGeometryType.esriGeometryPoint)
+                    {
+                        IFeatureCursor featureCursor = pFClass.Search(spatialFilter, true);
+                        IFeature pFeature = featureCursor.NextFeature();
+                        while (pFeature != null)
+                        {
+                            axMapControl1.Map.SelectFeature(pLayer, pFeature);
+                            pFeature = featureCursor.NextFeature();
+                        }
+                        axMapControl1.Refresh();
+                        flagSelectStation = false;
+                        选择当前测站ToolStripMenuItem.Checked = false;
+                    }
                 }
             }
         }
@@ -461,6 +493,12 @@ namespace ArcEngineProgram
                     }
                 }
             }
+        }
+
+        private void 选择当前测站ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            axMapControl1.CurrentTool = null;
+            flagSelectStation = true;
         }
     }
 }
