@@ -14,8 +14,8 @@ namespace ArcEngineProgram
         static void Main()
         {
             Application.EnableVisualStyles();
-            ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop);
             Application.SetCompatibleTextRenderingDefault(false);
+            ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop);
             Application.Run(new Form1());
         }
     }
