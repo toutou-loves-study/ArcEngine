@@ -71,16 +71,6 @@
             this.button3.Text = " 关闭(&C)";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button3
-            // 
-            this.button3.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.button3.Location = new System.Drawing.Point(563, 321);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "退出";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
