@@ -45,6 +45,7 @@
             this.输入仪器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.给出可测区域ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.清空容器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
@@ -52,7 +53,6 @@
             this.删除图层ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图层上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图层下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.清空容器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
@@ -192,6 +192,13 @@
             this.给出可测区域ToolStripMenuItem.Text = "给出可测区域";
             this.给出可测区域ToolStripMenuItem.Click += new System.EventHandler(this.给出可测区域ToolStripMenuItem_Click);
             // 
+            // 清空容器ToolStripMenuItem
+            // 
+            this.清空容器ToolStripMenuItem.Name = "清空容器ToolStripMenuItem";
+            this.清空容器ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.清空容器ToolStripMenuItem.Text = "清空";
+            this.清空容器ToolStripMenuItem.Click += new System.EventHandler(this.清空容器ToolStripMenuItem_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -243,13 +250,6 @@
             this.图层下移ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.图层下移ToolStripMenuItem.Text = "图层下移";
             this.图层下移ToolStripMenuItem.Click += new System.EventHandler(this.图层下移ToolStripMenuItem_Click);
-            // 
-            // 清空容器ToolStripMenuItem
-            // 
-            this.清空容器ToolStripMenuItem.Name = "清空容器ToolStripMenuItem";
-            this.清空容器ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.清空容器ToolStripMenuItem.Text = "清空";
-            this.清空容器ToolStripMenuItem.Click += new System.EventHandler(this.清空容器ToolStripMenuItem_Click);
             // 
             // axMapControl2
             // 

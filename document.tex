@@ -21,8 +21,8 @@
 {
 \Large\textbf{同济大学测绘与地理信息学院} \\
 1551126 余周炜 \\
-王雪辰 \\
-江子宇
+1551140 王雪辰 \\
+1551128 江子宇
 }
 \date{}
 
@@ -150,48 +150,66 @@ language=Matlab}
 
 下面分别说明这些功能
 \begin{description}
-\item[鹰眼功能] 
+\item[鹰眼功能] 利用axMapControl1的OnExtentUpdated事件，当主视图范围改变时，鹰眼视图主视图在鹰眼视图中的范围同时改变。利用axMapControl2的OnMouseDown事件，当鼠标在鹰眼视图中点击时，axMapControl1的范围同时改变。
+\item[图层移动] 利用axTOCControl1的OnMouseDown事件和它的HitTest方法，记录将要移动的图层，利用OnMouseUp事件和IMap的MoveLayer方法，将其移到所属的位置。
+\item[选择测区范围] 单击该选项时，将bool变量flagSelectFeature置为Checked,利用axMapControl1的OnMouseDown事件和TrackRectangle()方法，记录该选框的四个角点坐标，创建一条Polyline加入axMapControl1的图形容器中。
+\item[坐标添加控制点] 单击该选项时，将弹出对话框以输入坐标，单击确定时，将该坐标保存在类GlobalData的公有静态变量中，找到点图层并添加。
+\item[给出后视点] 1.点击输入仪器测量选项输入仪器测程；2.以该测程为半径生成一个缓冲区；3.选取该缓冲区内的控制点和建筑物；4.对每个除测站所在控制点之外的控制点和测站点生成一条polyline，与每个建筑物求交，若该polyline与所有建筑都不相交，则选择该控制点为后视点。
+\item[给出可测范围] 选中测站所在控制点，以测程为半径并显示。
 \end{description}
 
+此外，单击图层时，可以将属性表显示在下方的dataGridView中，在TOCControl中右键单击，会弹出menuStrip，将图层上移/下移或删除。还可以在选项中添加控制点，删除控制点和（随机）修改控制点符号。
 
+\chapter{等高线生成系统}
 
-
-
-
-    
-
-\chapter{构思}
-
-本程序分为三个部分，一是主界面，二是shp部分，第三是等高线部分。
-
-\begin{enumerate}
-\item 界面
-\item shp部分（数据集 控制点shp+polygon shp）
-\begin{enumerate}
-\item 鹰眼功能
-\item 拉框选择测区范围，在图上显示该测区所有控制点
-\item 选中某一控制点 给出可用的后视点 （遮蔽问题 满足一定距离）
-\item 选中某一控制点 给出测区范围     （缓冲区 遮蔽问题）
-\item 添加控制点 方式 输入坐标
-\end{enumerate}
-\item 等高线部分
+等高线生成系统实现了如下特色功能
 \begin{enumerate}
 \item 建TIN
 \item TIN转栅格
 \item 生成等高线
 \end{enumerate}
-\end{enumerate}
-   
 
-\chapter{小组特色}
+\chapter{小组合作}
 
-本小组通过不断学习尝试，实现了如下特色功能：
-\begin{enumerate}
-\item 鼠标拖拽使图层上下移动
-\end{enumerate}
+本小组的成员通过github进行合作及版本控制，方式是组长把程序推到github上，小组成员从组长的库中fork到自己的库中，更改后组长提出拉取请求(pull request)，组长审核后将该提交合并(merge)到主分支。
 
-% \bibliographystyle{plainnat}
-% \bibliography{reference}
-% \addcontentsline{toc}{chapter}{参考文献}
+Git版本控制系统中，将本地库叫master（主分支），将远程库叫origin。其他的分支这里还没有用到不讲。
+
+\section{远程库}
+
+github上提交的流程如图\ref{fig:cor}所示
+\begin{figure}[htbp]
+\caption{提交流程}
+\label{fig:cor}
+\centering
+\includegraphics[width=\textwidth]{corporation.JPG}
+\end{figure}
+
+需要说明的是，因为主场的远程库在不停变动，所以组员在每次修改之前，需要先\emph{merge}组长的远程分支到master，然后才能进行修改。
+
+\section{本地库}
+
+下面针对本地库作讲解。在本地库中，将你选择建立git的文件夹称为工作区，add之后到暂存区，commit之后到master（主分支）。
+
+git本地的操作如图所示\ref{fig:desktop}所示
+\begin{figure}[htbp]
+\caption{git本地操作}
+\label{fig:desktop}
+\centering
+\includegraphics[width=\textwidth]{desktop.JPG}
+\end{figure}
+
+\chapter{提交文件}
+
+\begin{table}[htbp]
+\centering
+\caption{文件}
+\begin{tabular}{p{3cm}p{7cm}}
+   项目文件 & ArcEngineProgram/ArcEngineProgram.sln  \\
+    源代码 & ArcEngineProgram/ArcEngineProgram/*.cs \\
+    编译好的程序 & ArcEngineProgram/ArcEngineProgram/bin/Debug/ArcEngineProgram \\
+    说明文件 & document.tex,document.pdf
+\end{tabular}
+\end{table}
 
 \end{document}
