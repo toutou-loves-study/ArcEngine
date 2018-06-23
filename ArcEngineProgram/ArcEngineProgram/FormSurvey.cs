@@ -212,11 +212,7 @@ namespace ArcEngineProgram
             }
         }
 
-<<<<<<< HEAD
-        private void axMapControl1_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
-        {
 
-=======
         private void 选择测区范围ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             flagSelectFeature = 选择测区范围ToolStripMenuItem.Checked;
@@ -395,7 +391,6 @@ namespace ArcEngineProgram
                     }
                 }
             }
->>>>>>> ef739aea0562ce3c19c2d30875fc3f05198de9ae
         }
     }
 }
