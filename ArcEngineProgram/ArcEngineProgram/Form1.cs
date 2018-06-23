@@ -24,15 +24,19 @@ namespace ArcEngineProgram
         private void button1_Click(object sender, EventArgs e)
         {
             FormSurvey formSurvey = new FormSurvey();
-            formSurvey.Show();
             this.Hide();
+            if (formSurvey.ShowDialog() == DialogResult.OK)
+                this.Visible = true;
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             FormContour ContourForm = new FormContour();
-            ContourForm.Show();
             this.Hide();
+            if (ContourForm.ShowDialog() == DialogResult.OK)
+                this.Visible = true;
+            
         }
 
         private void button3_Click(object sender, EventArgs e)

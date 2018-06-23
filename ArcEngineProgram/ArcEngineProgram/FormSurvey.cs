@@ -465,6 +465,7 @@ namespace ArcEngineProgram
             IPoint point = new PointClass();
             point.X = e.mapX;
             point.Y = e.mapY;
+            axMapControl1.CenterAt(point);
         }
 
         private void 坐标添加控制点ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -521,25 +522,54 @@ namespace ArcEngineProgram
                 axMapControl1.Map.ClearSelection();
                 ITopologicalOperator topoOperator = pFeature.Shape as ITopologicalOperator;
                 buffer = topoOperator.Buffer(bufferDistance);
-                ISpatialFilter spatilaFilter = new SpatialFilterClass();
+                ISpatialFilter spatilaFilter = new SpatialFilterClass(); //在缓冲区内
                 spatilaFilter.Geometry = buffer;
                 spatilaFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelContains;
                 int iIndex;
+                object o=Type.Missing;
+                IPoint pt0 = pFeature.Shape as IPoint;
                 for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
                 {
                     ILayer pLayer = axMapControl1.get_Layer(iIndex);
                     IFeatureLayer pFLayer = pLayer as IFeatureLayer;
                     IFeatureClass pFClass = pFLayer.FeatureClass;
-                    if (pFClass.ShapeType == esriGeometryType.esriGeometryPoint)
+                    ILayer lineLayer = axMapControl1.get_Layer(axMapControl1.LayerCount-1 - iIndex);
+                    IFeatureLayer lineFLayer = lineLayer as IFeatureLayer;
+                    IFeatureClass lineFClass = lineFLayer.FeatureClass;
+                    if (pFClass.ShapeType == esriGeometryType.esriGeometryPoint) //点图层
                     {
                         //IWorkspaceFactory pWSF=new 
 
-                        IFeatureCursor featureCursor = pFClass.Search(spatilaFilter, true);
+                        IFeatureCursor featureCursor = pFClass.Search(spatilaFilter, true);//圈内的点
                         IFeature oFeature = featureCursor.NextFeature();
+
                         while (oFeature != null)
                         {
-                            if(oFeature.OID!=pFeature.OID)
-                                axMapControl1.Map.SelectFeature(pLayer, oFeature);//找出处自己之外的伙伴
+                            if (oFeature.OID != pFeature.OID)
+                            {
+                                IFeatureCursor polygonCursor = lineFClass.Search(spatilaFilter, true);
+                                IFeature polyFeature = polygonCursor.NextFeature();
+                                IGeometryCollection polyline = new PolylineClass();
+                                IPoint pt1 = oFeature.Shape as IPoint;
+                                IPointCollection pPath = new PathClass();
+                                pPath.AddPoint(pt0, ref o, ref o);
+                                pPath.AddPoint(pt1, ref o, ref o);
+                                polyline.AddGeometry(pPath as IGeometry);
+                                ITopologicalOperator pTopoOperator = polyline as ITopologicalOperator;
+                                while (polyFeature != null)
+                                {
+                                    IPolyline pPolylineresult=pTopoOperator.Intersect(polyFeature.Shape,esriGeometryDimension.esriGeometry1Dimension) as IPolyline;
+                                    if (pPolylineresult.Length!=0)
+                                    {
+                                        break;
+                                    }
+                                    polyFeature = polygonCursor.NextFeature();
+                                }
+                                if (polyFeature == null)//normal end
+                                {
+                                    axMapControl1.Map.SelectFeature(pLayer, oFeature);//找出处自己之外的伙伴
+                                }
+                            }
                             oFeature = featureCursor.NextFeature();
                         }
                         break;
@@ -588,6 +618,19 @@ namespace ArcEngineProgram
                 pFeature = pEnumFeature.Next();
             }
             axMapControl1.Refresh();
+        }
+
+        private void 清空容器ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IGraphicsContainer gc = axMapControl1.ActiveView.GraphicsContainer;
+            gc.DeleteAllElements();
+            axMapControl1.Map.ClearSelection();
+            axMapControl1.Refresh();
+        }
+
+        private void FormSurvey_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
         }
     }
 }

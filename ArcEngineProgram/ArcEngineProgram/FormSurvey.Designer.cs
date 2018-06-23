@@ -35,13 +35,16 @@
             this.加载Shp文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择测区范围ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.选择当前测站ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.编辑ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.坐标添加控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除控制点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更换控制点符号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.输入仪器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.给出可测区域ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
@@ -49,9 +52,7 @@
             this.删除图层ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图层上移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图层下移ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.给出可测区域ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.选择当前测站ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.输入仪器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.清空容器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.axMapControl2 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
@@ -111,6 +112,14 @@
             this.选择测区范围ToolStripMenuItem.Text = "选择测区范围";
             this.选择测区范围ToolStripMenuItem.Click += new System.EventHandler(this.选择测区范围ToolStripMenuItem_Click);
             // 
+            // 选择当前测站ToolStripMenuItem
+            // 
+            this.选择当前测站ToolStripMenuItem.CheckOnClick = true;
+            this.选择当前测站ToolStripMenuItem.Name = "选择当前测站ToolStripMenuItem";
+            this.选择当前测站ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.选择当前测站ToolStripMenuItem.Text = "选择当前测站";
+            this.选择当前测站ToolStripMenuItem.Click += new System.EventHandler(this.选择当前测站ToolStripMenuItem_Click);
+            // 
             // 编辑ToolStripMenuItem
             // 
             this.编辑ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -156,10 +165,18 @@
             this.查询ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.输入仪器ToolStripMenuItem,
             this.dToolStripMenuItem,
-            this.给出可测区域ToolStripMenuItem});
+            this.给出可测区域ToolStripMenuItem,
+            this.清空容器ToolStripMenuItem});
             this.查询ToolStripMenuItem.Name = "查询ToolStripMenuItem";
             this.查询ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.查询ToolStripMenuItem.Text = "空间分析";
+            // 
+            // 输入仪器ToolStripMenuItem
+            // 
+            this.输入仪器ToolStripMenuItem.Name = "输入仪器ToolStripMenuItem";
+            this.输入仪器ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.输入仪器ToolStripMenuItem.Text = "输入仪器测程";
+            this.输入仪器ToolStripMenuItem.Click += new System.EventHandler(this.输入仪器ToolStripMenuItem_Click);
             // 
             // dToolStripMenuItem
             // 
@@ -167,6 +184,13 @@
             this.dToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
             this.dToolStripMenuItem.Text = "给出可用后视点";
             this.dToolStripMenuItem.Click += new System.EventHandler(this.dToolStripMenuItem_Click);
+            // 
+            // 给出可测区域ToolStripMenuItem
+            // 
+            this.给出可测区域ToolStripMenuItem.Name = "给出可测区域ToolStripMenuItem";
+            this.给出可测区域ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.给出可测区域ToolStripMenuItem.Text = "给出可测区域";
+            this.给出可测区域ToolStripMenuItem.Click += new System.EventHandler(this.给出可测区域ToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
@@ -220,27 +244,12 @@
             this.图层下移ToolStripMenuItem.Text = "图层下移";
             this.图层下移ToolStripMenuItem.Click += new System.EventHandler(this.图层下移ToolStripMenuItem_Click);
             // 
-            // 给出可测区域ToolStripMenuItem
+            // 清空容器ToolStripMenuItem
             // 
-            this.给出可测区域ToolStripMenuItem.Name = "给出可测区域ToolStripMenuItem";
-            this.给出可测区域ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.给出可测区域ToolStripMenuItem.Text = "给出可测区域";
-            this.给出可测区域ToolStripMenuItem.Click += new System.EventHandler(this.给出可测区域ToolStripMenuItem_Click);
-            // 
-            // 选择当前测站ToolStripMenuItem
-            // 
-            this.选择当前测站ToolStripMenuItem.CheckOnClick = true;
-            this.选择当前测站ToolStripMenuItem.Name = "选择当前测站ToolStripMenuItem";
-            this.选择当前测站ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
-            this.选择当前测站ToolStripMenuItem.Text = "选择当前测站";
-            this.选择当前测站ToolStripMenuItem.Click += new System.EventHandler(this.选择当前测站ToolStripMenuItem_Click);
-            // 
-            // 输入仪器ToolStripMenuItem
-            // 
-            this.输入仪器ToolStripMenuItem.Name = "输入仪器ToolStripMenuItem";
-            this.输入仪器ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.输入仪器ToolStripMenuItem.Text = "输入仪器测程";
-            this.输入仪器ToolStripMenuItem.Click += new System.EventHandler(this.输入仪器ToolStripMenuItem_Click);
+            this.清空容器ToolStripMenuItem.Name = "清空容器ToolStripMenuItem";
+            this.清空容器ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.清空容器ToolStripMenuItem.Text = "清空";
+            this.清空容器ToolStripMenuItem.Click += new System.EventHandler(this.清空容器ToolStripMenuItem_Click);
             // 
             // axMapControl2
             // 
@@ -295,6 +304,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormSurvey";
             this.Text = "FormSurvey";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSurvey_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -337,5 +347,6 @@
         private System.Windows.Forms.ToolStripMenuItem 选择当前测站ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 给出可测区域ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 输入仪器ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 清空容器ToolStripMenuItem;
     }
 }

@@ -16,12 +16,12 @@
 \numberwithin{equation}{section}
 
 
-\title{\Huge\emph{2018年GIS课程设计}\\实验报告}
+\title{{\Huge\emph{2018年GIS课程设计}\\实验报告}\\{\Large 项目名称：测量全生命周期支持系统}}
 \author
 {
 \Large\textbf{同济大学测绘与地理信息学院} \\
-余周炜\\
-王雪辰\\
+1551126 余周炜 \\
+王雪辰 \\
 江子宇
 }
 \date{}
@@ -102,6 +102,63 @@ language=Matlab}
 \tableofcontents
 
 \mainmatter
+
+\chapter{项目简介}
+
+本项目的名称是“测量全生命周期支持系统”,使用vs2010+arcEngine10.1开发，分为两个部分，一部分进行\textbf{辅助测量}，是为测量辅助系统，另一部分\textbf{生成等高线}。
+
+本项目的背景如下：测量实习中，我们常常为找不到控制点和输入新的控制点而烦恼，也为后面建立等高线的繁琐操作而苦恼不已，为了解决测量实习中的问题，开发了本系统，将测量过程中的各种操作用ArcEngine开发解决，使测量过程更加简单流畅。具体实现的功能将在后面的部分介绍。
+
+
+本项目主要有三个窗体，Form1为主窗体，如图\ref{fig:mainform}所示。
+\begin{figure}[htbp]
+\caption{主窗体}
+\label{fig:mainform}
+\centering
+\includegraphics[width=0.8\textwidth]{mainform.JPG}
+\end{figure}
+
+第二个窗体是FormSurvey,辅助有关测量行为的进行，如图\ref{fig:forms}所示。
+\begin{figure}[htbp]
+\caption{FormSurvey}
+\label{fig:forms}
+\centering
+\includegraphics[width=0.8\textwidth]{forms.JPG}
+\end{figure}
+
+第三个窗体是FormCoutour,进行有关等高线的绘制，如图\ref{fig:formc}所示。
+\begin{figure}[htbp]
+\caption{FormCoutour}
+\label{fig:formc}
+\centering
+\includegraphics[width=0.8\textwidth]{formc.JPG}
+\end{figure}
+
+此外还有FormDistance,AddControlPoint等对话框。
+
+\chapter{测量辅助系统}
+
+测量辅助系统实现了如下特色功能
+\begin{enumerate}   
+\item 鹰眼功能。
+\item 鼠标拖动移动图层功能。
+\item 输入坐标的方式添加控制点。
+\item 拉框选择测区范围，显示测区边界，并将测区范围内的控制点高亮显示。
+\item 选择测站所在的控制点、输入测距，在考虑遮蔽和测距的前提下给出可用的后视点。
+\item 选中测站所在的控制点，给出测区范围。
+\end{enumerate}
+
+下面分别说明这些功能
+\begin{description}
+\item[鹰眼功能] 
+\end{description}
+
+
+
+
+
+
+    
 
 \chapter{构思}
 

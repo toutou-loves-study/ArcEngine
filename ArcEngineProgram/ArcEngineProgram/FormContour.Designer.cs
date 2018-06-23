@@ -122,6 +122,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormContour";
             this.Text = "FormContour";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormContour_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).EndInit();
