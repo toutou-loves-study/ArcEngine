@@ -81,6 +81,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormDistance";
             this.Text = "FormDistance";
+            this.Load += new System.EventHandler(this.FormDistance_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

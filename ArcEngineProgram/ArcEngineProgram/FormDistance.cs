@@ -22,5 +22,10 @@ namespace ArcEngineProgram
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void FormDistance_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
