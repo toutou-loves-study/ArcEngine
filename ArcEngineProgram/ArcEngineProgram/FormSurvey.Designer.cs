@@ -164,8 +164,8 @@
             // 
             this.查询ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.输入仪器ToolStripMenuItem,
-            this.dToolStripMenuItem,
             this.给出可测区域ToolStripMenuItem,
+            this.dToolStripMenuItem,
             this.清空容器ToolStripMenuItem});
             this.查询ToolStripMenuItem.Name = "查询ToolStripMenuItem";
             this.查询ToolStripMenuItem.Size = new System.Drawing.Size(81, 24);

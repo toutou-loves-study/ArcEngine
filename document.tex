@@ -138,6 +138,8 @@ language=Matlab}
 
 \chapter{测量辅助系统}
 
+
+\section{功能}
 测量辅助系统实现了如下特色功能
 \begin{enumerate}   
 \item 鹰眼功能。
@@ -159,6 +161,42 @@ language=Matlab}
 \end{description}
 
 此外，单击图层时，可以将属性表显示在下方的dataGridView中，在TOCControl中右键单击，会弹出menuStrip，将图层上移/下移或删除。还可以在选项中添加控制点，删除控制点和（随机）修改控制点符号。
+
+\section{函数说明}
+
+在文件FormSurvey中：
+\begin{lstlisting}
+public DataTable GetLayerData(IFeatureLayer layer)
+\end{lstlisting}
+\begin{description}
+\item[作用] 从IFeatureLayer中获取属性表，并返回DataTable。
+\item[描述] 利用到要素层中的要素类的Fields的FieldCount字段和get\_Field(int index)方法，得到要素类的属性表的所有字段，利用字段的AliasName作为DataTable的字段名，对于每个要素，用get\_Value(int index)方法获取其第index个字段的值。
+\item[注意] 使用完FeatureCursor后要释放指针
+\end{description}
+\begin{lstlisting}
+private void 加载Shp文件ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 打开文件。
+\item[描述] 运用AxMapConntrol的AddShapFile方法，添加文件。
+\end{description}
+\begin{lstlisting}
+private void axMapControl1_OnExtentUpdated(object sender, IMapControlEvents2_OnExtentUpdatedEvent e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 更新axMapControl2的显示范围，画出axMapControl1的显示的边框。
+\item[描述] 将事件的e.newEnvelope强制转换为IEnvelope，利用graphicsContainer的AddElement添加元素画出边框。注意LineSymbol,FillSymbol和RgbColor的建立。
+\end{description}
+\begin{lstlisting}
+private void 删除图层ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 删除所选图层。
+\item[描述] 利用TOCControl的GetSelectedItem方法获取选中的TOCControlItem，在MapControl里找到对应图层,用MapControl的DeleteLayer方法删除该图层。
+\end{description}
+
+
+
 
 \chapter{等高线生成系统}
 
