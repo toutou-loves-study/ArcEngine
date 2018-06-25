@@ -34,6 +34,7 @@
             this.原始测量文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.建立TINToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.生成等高线ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.计算测区范围ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
@@ -49,7 +50,6 @@
             this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.axToolbarControl2 = new ESRI.ArcGIS.Controls.AxToolbarControl();
-            this.计算测区范围ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.Map.SuspendLayout();
@@ -107,6 +107,13 @@
             this.生成等高线ToolStripMenuItem.Text = "生成等高线";
             this.生成等高线ToolStripMenuItem.Click += new System.EventHandler(this.生成等高线ToolStripMenuItem_Click);
             // 
+            // 计算测区范围ToolStripMenuItem
+            // 
+            this.计算测区范围ToolStripMenuItem.Name = "计算测区范围ToolStripMenuItem";
+            this.计算测区范围ToolStripMenuItem.Size = new System.Drawing.Size(111, 24);
+            this.计算测区范围ToolStripMenuItem.Text = "计算测区范围";
+            this.计算测区范围ToolStripMenuItem.Click += new System.EventHandler(this.计算测区范围ToolStripMenuItem_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -161,7 +168,7 @@
             // axLicenseControl1
             // 
             this.axLicenseControl1.Enabled = true;
-            this.axLicenseControl1.Location = new System.Drawing.Point(85, 296);
+            this.axLicenseControl1.Location = new System.Drawing.Point(556, 89);
             this.axLicenseControl1.Name = "axLicenseControl1";
             this.axLicenseControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axLicenseControl1.OcxState")));
             this.axLicenseControl1.Size = new System.Drawing.Size(32, 32);
@@ -224,7 +231,7 @@
             this.axMapControl1.Location = new System.Drawing.Point(3, 3);
             this.axMapControl1.Name = "axMapControl1";
             this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
-            this.axMapControl1.Size = new System.Drawing.Size(451, 450);
+            this.axMapControl1.Size = new System.Drawing.Size(672, 477);
             this.axMapControl1.TabIndex = 6;
             // 
             // axTOCControl1
@@ -244,13 +251,6 @@
             this.axToolbarControl2.Size = new System.Drawing.Size(983, 28);
             this.axToolbarControl2.TabIndex = 3;
             // 
-            // 计算测区范围ToolStripMenuItem
-            // 
-            this.计算测区范围ToolStripMenuItem.Name = "计算测区范围ToolStripMenuItem";
-            this.计算测区范围ToolStripMenuItem.Size = new System.Drawing.Size(111, 24);
-            this.计算测区范围ToolStripMenuItem.Text = "计算测区范围";
-            this.计算测区范围ToolStripMenuItem.Click += new System.EventHandler(this.计算测区范围ToolStripMenuItem_Click);
-            // 
             // FormContour
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -265,7 +265,6 @@
             this.Name = "FormContour";
             this.Text = "FormContour";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormContour_FormClosed);
-
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

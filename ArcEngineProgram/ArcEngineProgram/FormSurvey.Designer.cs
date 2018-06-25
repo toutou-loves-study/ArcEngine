@@ -34,10 +34,6 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.加载Shp文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
-            this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
-
             this.选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择测区范围ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择当前测站ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
