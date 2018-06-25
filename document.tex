@@ -194,6 +194,28 @@ private void 删除图层ToolStripMenuItem_Click(object sender, EventArgs e)
 \item[作用] 删除所选图层。
 \item[描述] 利用TOCControl的GetSelectedItem方法获取选中的TOCControlItem，在MapControl里找到对应图层,用MapControl的DeleteLayer方法删除该图层。
 \end{description}
+\begin{lstlisting}
+private void axTOCControl1_OnMouseDown(object sender, ITOCControlEvents_OnMouseDownEvent e)
+\end{lstlisting}
+\begin{description}
+\item[作用] TOCControl按下鼠标触发事件
+\item[描述] 利用TOCControl的HitTest方法，获取鼠标点击的item，根据鼠标按键的不同执行不同的操作：左键将pMoveLayer置为所点击的图层，为拖动图层做铺垫，另外dataGridView显示其属性；右键弹出内容菜单。
+\end{description}
+\begin{lstlisting}
+\begin{lstlisting}
+private void axTOCControl1_OnMouseUp(object sender, ITOCControlEvents_OnMouseUpEvent e)
+\end{lstlisting}
+\begin{description}
+\item[作用] TOCControl抬起鼠标触发事件
+\item[描述] 利用TOCControl的HitTest方法，获取鼠标点击的item，根据鼠标按键的不同执行不同的操作：左键将pMoveLayer置为所点击的图层，为拖动图层做铺垫，另外dataGridView显示其属性；右键弹出内容菜单。
+\end{description}
+
+\end{lstlisting}
+\begin{description}
+\item[作用] TOCControl按下鼠标事件
+\item[描述] 利用TOCControl的HitTest方法，获取鼠标点击的item，根据鼠标按键的不同执行不同的操作：左键将pMoveLayer置为所点击的图层，为拖动图层做铺垫，另外dataGridView显示其属性；右键弹出内容菜单。
+\end{description}
+
 
 
 
