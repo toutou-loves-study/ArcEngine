@@ -33,7 +33,7 @@ namespace ArcEngineProgram
             InitializeComponent();
             toolStripStatusLabel1.Text = "";
         }
-        const string WorkSpaceName = @"E:/GitHub/ArcEngine/ArcEngineProgram/File";
+        const string WorkSpaceName = "File";
         //private void AddInfo_statusbar(object o, System.EventArgs e) //更新状态栏信息
         //{
         //    toolStripStatusLabel1.Text = o.ToString();
