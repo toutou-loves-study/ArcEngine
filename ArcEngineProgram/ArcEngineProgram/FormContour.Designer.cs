@@ -224,8 +224,8 @@
             this.axMapControl1.Location = new System.Drawing.Point(3, 3);
             this.axMapControl1.Name = "axMapControl1";
             this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
-            this.axMapControl1.Size = new System.Drawing.Size(672, 477);
-            this.axMapControl1.TabIndex = 0;
+            this.axMapControl1.Size = new System.Drawing.Size(451, 450);
+            this.axMapControl1.TabIndex = 6;
             // 
             // axTOCControl1
             // 
@@ -263,7 +263,9 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormContour";
-            this.Text = " ";
+            this.Text = "FormContour";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormContour_FormClosed);
+
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);

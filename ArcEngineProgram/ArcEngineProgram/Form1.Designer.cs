@@ -63,13 +63,14 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("微软雅黑", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.button3.Location = new System.Drawing.Point(491, 301);
+            this.button3.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.button3.Location = new System.Drawing.Point(528, 321);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(115, 50);
+            this.button3.Size = new System.Drawing.Size(110, 43);
             this.button3.TabIndex = 2;
-            this.button3.Text = " 关闭(&C)";
+            this.button3.Text = "退出(&E)";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 

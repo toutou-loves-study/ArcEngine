@@ -302,6 +302,12 @@ namespace ArcEngineProgram
         //    axMapControl1.Refresh(); ;
         }
 
+        private void FormContour_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
+
+       
        
 
 

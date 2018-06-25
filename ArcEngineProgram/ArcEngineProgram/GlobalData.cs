@@ -9,5 +9,6 @@ namespace ArcEngineProgram
     {
         public static double x;
         public static double y;
+        public static double dist=200;
     }
 }
