@@ -21,7 +21,6 @@ namespace ArcEngineProgram
         bool flagCreateFeature = false;
         bool flagSelectStation = false;
         IElement rectpElement;
-        IPoint station;
 
         public IColor Color2IColor(Color color)
         {
@@ -354,9 +353,7 @@ namespace ArcEngineProgram
                         IFeature pFeature = featureCursor.NextFeature();
                         while (pFeature != null)
                         {
-                            
                             axMapControl1.Map.SelectFeature(pLayer, pFeature);
-                            station = pFeature.Shape as IPoint;
                             pFeature = featureCursor.NextFeature();
                         }
                         axMapControl1.Refresh();
@@ -599,12 +596,13 @@ namespace ArcEngineProgram
 
         private void 给出可测区域ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            IGeometry buffer;
+            ISelection pSeletion = axMapControl1.Map.FeatureSelection;
+            IEnumFeature pEnumFeature = (IEnumFeature)pSeletion;
             IGraphicsContainer graphicsContainer = axMapControl1.ActiveView.GraphicsContainer;
-            ITopologicalOperator topoOp = station as ITopologicalOperator;
-            IGeometry buffer = topoOp.Buffer(GlobalData.dist);
-            //ISpatialFilter spatilaFilter = new SpatialFilterClass(); //在缓冲区内
-            //spatilaFilter.Geometry = buffer;
-            //spatilaFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelContains;
+
+            //graphicsContainer.DeleteAllElements();
+            IFeature pFeature = pEnumFeature.Next(); //选择集
             double bufferDistance = GlobalData.dist;
             if (bufferDistance <= 0.0)
             {
@@ -613,70 +611,16 @@ namespace ArcEngineProgram
             }
 
 
-            if (station != null)
+            while (pFeature != null)
             {
-                double x;
-                double y;
-                IPointCollection pRing = new RingClass();
-                IRelationalOperator relationOp;
-                IGeometryCollection polygon = new PolygonClass();
-                int iIndex;
-                for (iIndex = 0; iIndex < axMapControl1.LayerCount; iIndex++)
-                {
-                    ILayer pLayer = axMapControl1.get_Layer(iIndex);
-                    IFeatureLayer pFLayer = pLayer as IFeatureLayer;
-                    IFeatureClass pFClass = pFLayer.FeatureClass;
-                    IPoint pt = new PointClass();
-                    object o=Type.Missing;
-                    if (pFClass.ShapeType == esriGeometryType.esriGeometryPolygon)
-                    {
-
-                        
-                        for (double theta = 0; theta <= 2 * Math.PI; theta += 0.02)
-                        {
-                            for (double r = 1; r <= bufferDistance; r+=bufferDistance/200)
-                            {
-                                x = station.X+r * Math.Cos(theta);
-                                y = station.Y+r * Math.Sin(theta);
-                                pt.X=x;
-                                pt.Y=y;
-                                IFeatureCursor featureCursor = pFClass.Search(null, true);
-                                IFeature feature = featureCursor.NextFeature();
-                                while (feature != null)
-                                {
-                                    relationOp = feature.Shape as IRelationalOperator;
-                                    if (relationOp.Contains(pt as IGeometry))
-                                    {
-                                        break;
-                                    }
-                                    feature = featureCursor.NextFeature();
-                                }
-                                if (feature != null)
-                                {
-                                    pRing.AddPoint(pt, ref o, ref o);
-                                    break;
-                                }
-                                else if (feature == null && r == bufferDistance)
-                                {
-                                    pRing.AddPoint(pt, ref o, ref o);
-                                }
-                            }
-                        }
-                        polygon.AddGeometry(pRing as IGeometry);
-                    }
-                }
-
-
-
-
-
-
-                //buffer = topoOperator.Buffer(bufferDistance);
-                //topoOperator = buffer as ITopologicalOperator;
-                //if(rectpElement!=null)
-                //    topoOperator.Clip(rectpElement.Geometry.Envelope);
+                ITopologicalOperator topoOperator = pFeature.Shape as ITopologicalOperator;
+                buffer = topoOperator.Buffer(bufferDistance);
+                topoOperator = buffer as ITopologicalOperator;
+                IGeometry result;
+                if(rectpElement!=null)
+                    topoOperator.Clip(rectpElement.Geometry.Envelope);
                 IElement element = new PolygonElementClass();
-                element.Geometry = polygon as IGeometry;
+                element.Geometry = buffer;
 
                 //创建矩形轮廓的样式
                 ILineSymbol linesymbol = new SimpleLineSymbolClass();
@@ -690,10 +634,6 @@ namespace ArcEngineProgram
                 linesymbol.Color = rgbColor;
 
                 IFillSymbol fillsymbol = new SimpleFillSymbolClass();
-                rgbColor.Red = 0;
-                rgbColor.Green = 255;
-                rgbColor.Blue = 107;
-
 
                 rgbColor.Transparency = 0;
                 fillsymbol.Color = rgbColor;
@@ -703,31 +643,7 @@ namespace ArcEngineProgram
                 fillshapeElement.Symbol = fillsymbol;
                 // 添加绘图元素
                 graphicsContainer.AddElement(element, 0);
-
-                IElement element2 = new PolygonElementClass();
-                element2.Geometry =buffer as IGeometry;
-
-                //创建矩形轮廓的样式
-                ILineSymbol linesymbol2 = new SimpleLineSymbolClass();
-                linesymbol2.Width = 2;
-
-                rgbColor.Red = 65;
-                rgbColor.Green = 105;
-                rgbColor.Blue = 225;
-                rgbColor.Transparency = 255;
-                linesymbol.Color = rgbColor;
-
-                IFillSymbol fillsymbol2 = new SimpleFillSymbolClass();
-                rgbColor.Transparency = 0;
-                fillsymbol2.Color = rgbColor;
-                fillsymbol2.Outline = linesymbol;
-
-                IFillShapeElement fillshapeElement2 = element2 as IFillShapeElement;
-                fillshapeElement2.Symbol = fillsymbol2;
-                // 添加绘图元素
-                graphicsContainer.AddElement(element2, 0);
-
-
+                pFeature = pEnumFeature.Next();
             }
             axMapControl1.Refresh();
         }
