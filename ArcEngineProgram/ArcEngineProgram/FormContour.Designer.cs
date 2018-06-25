@@ -42,27 +42,30 @@
             this.Map = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
+            this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.axLicenseControl2 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.axSceneControl1 = new ESRI.ArcGIS.Controls.AxSceneControl();
-            this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
             this.axToolbarControl2 = new ESRI.ArcGIS.Controls.AxToolbarControl();
+            this.axToolbarControl1 = new ESRI.ArcGIS.Controls.AxToolbarControl();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.Map.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axSceneControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -122,8 +125,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar1,
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 571);
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 592);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(983, 25);
             this.statusStrip1.TabIndex = 8;
@@ -131,6 +135,7 @@
             // 
             // toolStripProgressBar1
             // 
+            this.toolStripProgressBar1.Maximum = 3;
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 19);
             this.toolStripProgressBar1.Step = 1;
@@ -146,10 +151,10 @@
             this.Map.Controls.Add(this.tabPage1);
             this.Map.Controls.Add(this.tabPage2);
             this.Map.Controls.Add(this.tabPage3);
-            this.Map.Location = new System.Drawing.Point(297, 56);
+            this.Map.Location = new System.Drawing.Point(297, 90);
             this.Map.Name = "Map";
             this.Map.SelectedIndex = 0;
-            this.Map.Size = new System.Drawing.Size(686, 512);
+            this.Map.Size = new System.Drawing.Size(686, 478);
             this.Map.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.Map.TabIndex = 9;
             // 
@@ -160,7 +165,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(678, 483);
+            this.tabPage1.Size = new System.Drawing.Size(678, 449);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Map";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -174,13 +179,23 @@
             this.axLicenseControl1.Size = new System.Drawing.Size(32, 32);
             this.axLicenseControl1.TabIndex = 1;
             // 
+            // axMapControl1
+            // 
+            this.axMapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axMapControl1.Location = new System.Drawing.Point(3, 3);
+            this.axMapControl1.Name = "axMapControl1";
+            this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
+            this.axMapControl1.Size = new System.Drawing.Size(672, 443);
+            this.axMapControl1.TabIndex = 6;
+            this.axMapControl1.OnMouseMove += new ESRI.ArcGIS.Controls.IMapControlEvents2_Ax_OnMouseMoveEventHandler(this.axMapControl1_OnMouseMove);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(678, 483);
+            this.tabPage2.Size = new System.Drawing.Size(678, 449);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Property Table";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -192,7 +207,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(672, 477);
+            this.dataGridView1.Size = new System.Drawing.Size(672, 443);
             this.dataGridView1.TabIndex = 0;
             // 
             // tabPage3
@@ -202,7 +217,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 25);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(678, 483);
+            this.tabPage3.Size = new System.Drawing.Size(678, 449);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "TIN";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -222,24 +237,15 @@
             this.axSceneControl1.Location = new System.Drawing.Point(3, 3);
             this.axSceneControl1.Name = "axSceneControl1";
             this.axSceneControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axSceneControl1.OcxState")));
-            this.axSceneControl1.Size = new System.Drawing.Size(672, 477);
+            this.axSceneControl1.Size = new System.Drawing.Size(672, 443);
             this.axSceneControl1.TabIndex = 0;
-            // 
-            // axMapControl1
-            // 
-            this.axMapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.axMapControl1.Location = new System.Drawing.Point(3, 3);
-            this.axMapControl1.Name = "axMapControl1";
-            this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
-            this.axMapControl1.Size = new System.Drawing.Size(672, 477);
-            this.axMapControl1.TabIndex = 6;
             // 
             // axTOCControl1
             // 
-            this.axTOCControl1.Location = new System.Drawing.Point(0, 56);
+            this.axTOCControl1.Location = new System.Drawing.Point(0, 90);
             this.axTOCControl1.Name = "axTOCControl1";
             this.axTOCControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axTOCControl1.OcxState")));
-            this.axTOCControl1.Size = new System.Drawing.Size(291, 512);
+            this.axTOCControl1.Size = new System.Drawing.Size(291, 478);
             this.axTOCControl1.TabIndex = 5;
             // 
             // axToolbarControl2
@@ -251,11 +257,27 @@
             this.axToolbarControl2.Size = new System.Drawing.Size(983, 28);
             this.axToolbarControl2.TabIndex = 3;
             // 
+            // axToolbarControl1
+            // 
+            this.axToolbarControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.axToolbarControl1.Location = new System.Drawing.Point(0, 56);
+            this.axToolbarControl1.Name = "axToolbarControl1";
+            this.axToolbarControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axToolbarControl1.OcxState")));
+            this.axToolbarControl1.Size = new System.Drawing.Size(983, 28);
+            this.axToolbarControl1.TabIndex = 10;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(167, 20);
+            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+            // 
             // FormContour
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 596);
+            this.ClientSize = new System.Drawing.Size(983, 617);
+            this.Controls.Add(this.axToolbarControl1);
             this.Controls.Add(this.Map);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.axTOCControl1);
@@ -272,14 +294,15 @@
             this.Map.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axSceneControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axToolbarControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,6 +331,8 @@
         private ESRI.ArcGIS.Controls.AxLicenseControl axLicenseControl2;
         private System.Windows.Forms.ToolStripMenuItem 生成等高线ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 计算测区范围ToolStripMenuItem;
+        private ESRI.ArcGIS.Controls.AxToolbarControl axToolbarControl1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
 
     }
 }
