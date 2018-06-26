@@ -238,7 +238,7 @@ namespace ArcEngineProgram
             return pContourFeatureClass;
         }
 
-        private IFeature Convert_Point2MultiPoint(IFeatureClass PointFeatureClass)
+        private IFeature Convert_Point2MultiPoint_Class(IFeatureClass PointFeatureClass)
         {
             IWorkspaceFactory contourWSF = new ShapefileWorkspaceFactoryClass();
             IFeatureWorkspace contourFWS = (IFeatureWorkspace)contourWSF.OpenFromFile(WorkSpaceName, 0);
@@ -266,6 +266,17 @@ namespace ArcEngineProgram
             return MultiFeature;
         }
 
+        private IPointCollection Convert_Point2MultiPoint(IFeatureClass PointFeatureClass)
+        {
+            IPointCollection pPointCollection = new MultipointClass();
+            for (int i = 0; i < PointFeatureClass.FeatureCount(null); i++)
+            {
+                IFeature pFeature = PointFeatureClass.GetFeature(i);
+                IPoint pPoint = pFeature.Shape as IPoint;
+                pPointCollection.AddPoint(pPoint);
+            }
+            return pPointCollection;
+        }
 
         private void 原始测量文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -357,9 +368,10 @@ namespace ArcEngineProgram
                 }
             }
             IGeometry ConvexHullGeometry = null;
-            IFeature MultiPointFeature = Convert_Point2MultiPoint(PointFeatureClass); ;
-
-            ITopologicalOperator topOperator = MultiPointFeature.Shape as ITopologicalOperator;
+            //IFeature MultiPointFeature = Convert_Point2MultiPoint__Class(PointFeatureClass); ;
+            IPointCollection ptCollection = Convert_Point2MultiPoint(PointFeatureClass);
+            //ITopologicalOperator topOperator = MultiPointFeature.Shape as ITopologicalOperator;
+            ITopologicalOperator topOperator = ptCollection as ITopologicalOperator;
             ConvexHullGeometry = topOperator.ConvexHull();
             IPolygon CHpolygon = ConvexHullGeometry as IPolygon;
             IArea pArea = ConvexHullGeometry as IArea;

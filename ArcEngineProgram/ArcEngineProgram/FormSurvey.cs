@@ -241,7 +241,7 @@ namespace ArcEngineProgram
                 p2 = new PointClass();
                 p3 = new PointClass();
                 p4 = new PointClass();
-                p1.PutCoords(geometry.Envelope.XMin, geometry.Envelope.YMin);
+                 p1.PutCoords(geometry.Envelope.XMin, geometry.Envelope.YMin);
                 p2.PutCoords(geometry.Envelope.XMin, geometry.Envelope.YMax);
                 p3.PutCoords(geometry.Envelope.XMax, geometry.Envelope.YMax);
                 p4.PutCoords(geometry.Envelope.XMax, geometry.Envelope.YMin);
