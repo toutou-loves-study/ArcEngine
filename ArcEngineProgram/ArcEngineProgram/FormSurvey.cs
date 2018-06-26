@@ -114,7 +114,6 @@ namespace ArcEngineProgram
             rgbColor.Blue = 0;
             rgbColor.Transparency = 255;
             linesymbol.Color = rgbColor;
-
             IFillSymbol fillsymbol = new SimpleFillSymbolClass();
             rgbColor.Transparency = 0;
             fillsymbol.Color = rgbColor;
