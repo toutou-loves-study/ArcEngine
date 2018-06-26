@@ -33,7 +33,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.加载Shp文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-
             this.选择ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择测区范围ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选择当前测站ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +47,6 @@
             this.给出可测区域ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清空容器ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -97,15 +95,7 @@
             this.加载Shp文件ToolStripMenuItem.Text = "添加shp文件";
             this.加载Shp文件ToolStripMenuItem.Click += new System.EventHandler(this.加载Shp文件ToolStripMenuItem_Click);
             // 
-
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // axTOCControl1
-
             // 选择ToolStripMenuItem
-
             // 
             this.选择ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.选择测区范围ToolStripMenuItem,

@@ -20,6 +20,7 @@ namespace ArcEngineProgram
         bool flagSelectFeature = false;
         bool flagCreateFeature = false;
         bool flagSelectStation = false;
+        IElement rectpElement;
 
         public IColor Color2IColor(Color color)
         {
@@ -274,13 +275,12 @@ namespace ArcEngineProgram
                }
                 IGeometry polyline=pPolyline as IGeometry;
                 ILineElement pLineElement=new LineElementClass();
-                IElement pElement;
-                pElement=pLineElement as IElement;
-                pElement.Geometry=polyline;
+                rectpElement=pLineElement as IElement;
+                rectpElement.Geometry=polyline;
                 IGraphicsContainer graphicsContainer = axMapControl1.ActiveView.GraphicsContainer;
                 graphicsContainer.DeleteAllElements();
 
-                graphicsContainer.AddElement((IElement)pLineElement, 0);
+                graphicsContainer.AddElement(rectpElement, 0);
                 axMapControl1.Refresh();
                 
                 //创建sptialFilter
@@ -509,8 +509,8 @@ namespace ArcEngineProgram
             IGeometry buffer;
             ISelection pSeletion = axMapControl1.Map.FeatureSelection;
             IEnumFeature pEnumFeature = (IEnumFeature)pSeletion;
-            IGraphicsContainer graphicsContainer = axMapControl1.ActiveView.GraphicsContainer;
-            graphicsContainer.DeleteAllElements();
+            //IGraphicsContainer graphicsContainer = axMapControl1.ActiveView.GraphicsContainer;
+            //graphicsContainer.DeleteAllElements();
             IFeature pFeature = pEnumFeature.Next();//自己
             double bufferDistance = GlobalData.dist;
             if (bufferDistance <= 0.0)
@@ -553,6 +553,7 @@ namespace ArcEngineProgram
                                 IGeometryCollection polyline = new PolylineClass();
                                 IPoint pt1 = oFeature.Shape as IPoint;
                                 IPointCollection pPath = new PathClass();
+                                
                                 pPath.AddPoint(pt0, ref o, ref o);
                                 pPath.AddPoint(pt1, ref o, ref o);
                                 polyline.AddGeometry(pPath as IGeometry);
@@ -599,8 +600,9 @@ namespace ArcEngineProgram
             ISelection pSeletion = axMapControl1.Map.FeatureSelection;
             IEnumFeature pEnumFeature = (IEnumFeature)pSeletion;
             IGraphicsContainer graphicsContainer = axMapControl1.ActiveView.GraphicsContainer;
-            graphicsContainer.DeleteAllElements();
-            IFeature pFeature = pEnumFeature.Next();
+
+            //graphicsContainer.DeleteAllElements();
+            IFeature pFeature = pEnumFeature.Next(); //选择集
             double bufferDistance = GlobalData.dist;
             if (bufferDistance <= 0.0)
             {
@@ -613,8 +615,33 @@ namespace ArcEngineProgram
             {
                 ITopologicalOperator topoOperator = pFeature.Shape as ITopologicalOperator;
                 buffer = topoOperator.Buffer(bufferDistance);
+                topoOperator = buffer as ITopologicalOperator;
+                IGeometry result;
+                if(rectpElement!=null)
+                    topoOperator.Clip(rectpElement.Geometry.Envelope);
                 IElement element = new PolygonElementClass();
                 element.Geometry = buffer;
+
+                //创建矩形轮廓的样式
+                ILineSymbol linesymbol = new SimpleLineSymbolClass();
+                linesymbol.Width = 2;
+
+                IRgbColor rgbColor = new RgbColorClass();
+                rgbColor.Red = 65;
+                rgbColor.Green = 105;
+                rgbColor.Blue =225;
+                rgbColor.Transparency = 255;
+                linesymbol.Color = rgbColor;
+
+                IFillSymbol fillsymbol = new SimpleFillSymbolClass();
+
+                rgbColor.Transparency = 0;
+                fillsymbol.Color = rgbColor;
+                fillsymbol.Outline = linesymbol;
+
+                IFillShapeElement fillshapeElement = element as IFillShapeElement;
+                fillshapeElement.Symbol = fillsymbol;
+                // 添加绘图元素
                 graphicsContainer.AddElement(element, 0);
                 pFeature = pEnumFeature.Next();
             }
