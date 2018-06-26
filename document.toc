@@ -1,9 +1,19 @@
 \contentsline {chapter}{\numberline {1}项目简介}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}项目背景}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}开发平台}{1}{section.1.2}
+\contentsline {section}{\numberline {1.3}数据}{1}{section.1.3}
+\contentsline {paragraph}{原始数据}{1}{section.1.3}
+\contentsline {section}{\numberline {1.4}程序框架}{2}{section.1.4}
 \contentsline {chapter}{\numberline {2}测量辅助系统}{4}{chapter.2}
 \contentsline {section}{\numberline {2.1}功能}{4}{section.2.1}
 \contentsline {section}{\numberline {2.2}函数说明}{5}{section.2.2}
-\contentsline {chapter}{\numberline {3}等高线生成系统}{7}{chapter.3}
-\contentsline {chapter}{\numberline {4}小组合作}{8}{chapter.4}
-\contentsline {section}{\numberline {4.1}远程库}{8}{section.4.1}
-\contentsline {section}{\numberline {4.2}本地库}{10}{section.4.2}
-\contentsline {chapter}{\numberline {5}提交文件}{11}{chapter.5}
+\contentsline {chapter}{\numberline {3}等高线生成系统}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}功能说明}{11}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}读取pnt文件并保存为shp文件}{11}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}建立TIN}{13}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}生成等高线}{13}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}测区面积量算}{14}{subsection.3.1.4}
+\contentsline {chapter}{\numberline {4}小组合作}{15}{chapter.4}
+\contentsline {section}{\numberline {4.1}远程库}{15}{section.4.1}
+\contentsline {section}{\numberline {4.2}本地库}{17}{section.4.2}
+\contentsline {chapter}{\numberline {5}提交文件}{18}{chapter.5}

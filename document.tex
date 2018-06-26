@@ -16,7 +16,7 @@
 \numberwithin{equation}{section}
 
 
-\title{{\Huge\emph{2018年GIS课程设计}\\实验报告}\\{\Large 项目名称：测量全生命周期支持系统}}
+\title{\Huge\textbf{测量全生命周期支持系统}\Huge\\设 \\ 计 \\ 开 \\ 发 \\ 报 \\ 告} 
 \author
 {
 \Large\textbf{同济大学测绘与地理信息学院} \\
@@ -55,7 +55,7 @@
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 \lstset{backgroundcolor=\color{white},
-numbers=left,
+% numbers=left,
 numberstyle=\small,
 frame=lines,
 basicstyle=\conso,
@@ -65,7 +65,7 @@ tabsize=4,
 keywordstyle=\color{blue},
 commentstyle=\color{mygreen},
 stringstyle=\color{mymauve}\ttfamily,
-language=Matlab}
+language=[Sharp]C}
 % \usepackage[numbered,autolinebreaks,useliterate]{mcode}
 
 % \usepackage{mdwlist}
@@ -107,8 +107,22 @@ language=Matlab}
 
 本项目的名称是“测量全生命周期支持系统”,使用vs2010+arcEngine10.1开发，分为两个部分，一部分进行\textbf{辅助测量}，是为测量辅助系统，另一部分\textbf{生成等高线}。
 
-本项目的背景如下：测量实习中，我们常常为找不到控制点和输入新的控制点而烦恼，也为后面建立等高线的繁琐操作而苦恼不已，为了解决测量实习中的问题，开发了本系统，将测量过程中的各种操作用ArcEngine开发解决，使测量过程更加简单流畅。具体实现的功能将在后面的部分介绍。
+\section{项目背景}
+测量实习中，数字平面地形图测绘部分需要用到CAD进行设站点、后视点选择以及地形图展绘；等高线测量部分需要用到ArcGIS生成等高线。 然而在实际的操作过程中，我们常常为找不到控制点和输入新的控制点而烦恼。例如校庆修路使控制点的位置和数量都发生了一定的变化，此时就需要对控制点进行大批量的更新。此外，在ArcMap中生成等高线需要经历生成TIN、TIN转栅格、生成等高线的过程，较为繁琐。
 
+为了解决测量实习中的这些问题，开发了本系统，将测量过程中的各种操作用ArcEngine开发集成，使测量过程更加简单流畅。
+
+\section{开发平台}
+
+vs2010+ArcEngine10.1
+
+\section{数据}
+
+\paragraph{原始数据} 校园dwg图（包含控制点图层以及地物图层）
+
+数据准备阶段将包含控制点的CAD图层转为point类型的shp文件，将包含建筑物的CAD图层转为polygon类型的shp文件。
+
+\section{程序框架}
 
 本项目主要有三个窗体，Form1为主窗体，如图\ref{fig:mainform}所示。
 \begin{figure}[htbp]
@@ -202,21 +216,100 @@ private void axTOCControl1_OnMouseDown(object sender, ITOCControlEvents_OnMouseD
 \item[描述] 利用TOCControl的HitTest方法，获取鼠标点击的item，根据鼠标按键的不同执行不同的操作：左键将pMoveLayer置为所点击的图层，为拖动图层做铺垫，另外dataGridView显示其属性；右键弹出内容菜单。
 \end{description}
 \begin{lstlisting}
-\begin{lstlisting}
 private void axTOCControl1_OnMouseUp(object sender, ITOCControlEvents_OnMouseUpEvent e)
 \end{lstlisting}
 \begin{description}
 \item[作用] TOCControl抬起鼠标触发事件
 \item[描述] 利用TOCControl的HitTest方法，获取鼠标点击的item，根据鼠标按键的不同执行不同的操作：左键将pMoveLayer置为所点击的图层，为拖动图层做铺垫，另外dataGridView显示其属性；右键弹出内容菜单。
 \end{description}
-
+\begin{lstlisting}
+private void 选择测区范围ToolStripMenuItem_Click(object sender, EventArgs e)
 \end{lstlisting}
 \begin{description}
-\item[作用] TOCControl按下鼠标事件
-\item[描述] 利用TOCControl的HitTest方法，获取鼠标点击的item，根据鼠标按键的不同执行不同的操作：左键将pMoveLayer置为所点击的图层，为拖动图层做铺垫，另外dataGridView显示其属性；右键弹出内容菜单。
+\item[作用] flagSelectFeature置为ToolStripMenuItem的Checked属性值，为axMapControl的OnMouseDown事件作铺垫。
 \end{description}
 
-
+\begin{lstlisting}
+private void axMapControl1_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
+\end{lstlisting}
+\begin{description}
+\item[作用] MapControl的按下鼠标触发该事件
+\item[描述] 如果flagSelectFeature为真，则调用axMapControl1的TrackRectangle方法,返回一个geometry，并利用这四个角点新建一个Polyline，并用GraphicsContainer的AddElement方法加入Polyline元素，即为测区范围；其次，创建一个spatialFilter，表示与Polygon相交，利用点图层的FeatureClass的Search方法，返回在矩形内的控制点，并将其选中高亮显示。如果flagCreateFeature为真，则创建控制点。如果flagSelectStation为真，则调用axMapControl1的TrackCircle方法，选中测站点并高亮显示。
+\end{description}
+\begin{lstlisting}
+private void 图层上移ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 将选中的图层上移一层
+\item[描述] 利用axTOCControl1的GetSelectedItem方法找出选中图层，遍历所有图层，找到该图层的index，并用axMapControl1的MoveLayerTo方法将该图层上移一层。
+\end{description}
+\begin{lstlisting}
+private void 图层下移ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 将选中的图层下移一层
+\item[描述] 利用axTOCControl1的GetSelectedItem方法找出选中图层，遍历所有图层，找到该图层的index，并用axMapControl1的MoveLayerTo方法将该图层下移一层。
+\end{description}
+\begin{lstlisting}
+private void 添加控制点ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 将flagCreateFeature置为添加控制点ToolStripMenuItem的Checked属性。
+\end{description}
+\begin{lstlisting}
+private void 更换控制点符号ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 更换控制点的符号
+\item[描述] 选择控制点所在的图层，利用随机数，生成不同的颜色和形状，利用ISimpleMarkerSymbol 和 SimpleRenderer 设置符号和图层的渲染。
+\end{description}
+\begin{lstlisting}
+private void 删除控制点ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 将选中的控制点删除
+\item[描述] 通过ISeletion和IEnumFeature接口将选中的实体遍历并用IFeature的Delete方法删除。
+\end{description}
+\begin{lstlisting}
+private void axMapControl2_OnMouseDown(object sender, IMapControlEvents2_OnMouseDownEvent e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 在axMapControl1的地图的中心移到axMapControl2中所点的位置。
+\item[描述] 利用axMapControl1的CenterAt方法即可
+\end{description}
+\begin{lstlisting}
+private void 坐标添加控制点ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 利用弹出对话框的方式，输入坐标添加控制点
+\item[描述] 首先找到点图层，利用IPoint的PutCoords方法生成点，利用FeatureClass的CreateFeature()方法创建点。
+\end{description}
+\begin{lstlisting}
+private void 选择当前测站ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 将flagSelectStation置为true。
+\end{description}
+\begin{lstlisting}
+private void dToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 在考虑建筑物遮挡的情况下给出可以看到的后视点。
+\item[描述] 首先，建立一个半径为测程的buffer，第二，得出在buffer内的控制点和建筑物图层，第三，对每个在buffer内的非测站点，与测站点连一条线，此即为视线，判断该视线是否与建筑物相交（ITopologicalOperator的Intersect方法），如果与所有建筑物均不相交，则将其高亮显示。
+\end{description}
+\begin{lstlisting}
+private void 输入仪器ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 弹出输入仪器测程对话框。
+\end{description}
+\begin{lstlisting}
+private void 给出可测区域ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\begin{description}
+\item[作用] 给出可测区域的范围
+\item[描述] 先以测程为半径创建一个缓冲区，然后将该缓冲区与测区范围作减运算（clip），得到可测区域范围。
+\end{description}
 
 
 
@@ -227,7 +320,115 @@ private void axTOCControl1_OnMouseUp(object sender, ITOCControlEvents_OnMouseUpE
 \item 建TIN
 \item TIN转栅格
 \item 生成等高线
+\item 由shp文件建立TIN
 \end{enumerate}
+
+下面这对这些作详细说明。
+
+\section{功能说明}
+
+\subsection{读取pnt文件并保存为shp文件} 
+\begin{enumerate}
+\item 实现的功能\\
+pnt文件是从全站仪中直接导出来的数据，是一种文本文件，每行是一条记录，记录以逗号分隔。
+
+该步骤将pnt文件中的高程点数据读取出来，建立新的point类型的shapefile,并对其建立属性表。
+\item 主要接口\\
+IWorkspaceFactory,IFeatureWorkspace,IFeatureClass, IFeatureCursor,IField,IFieldEdit
+\item 函数与数据组织结构
+\begin{enumerate}
+\item 点的数据结构
+\begin{lstlisting}
+struct Point3D
+{
+    public string ID;
+    public double X;
+    public double Y;
+    public double Z;
+}
+\end{lstlisting}
+\item 读取pnt文件
+\begin{lstlisting}
+Private List<Point3D> Read_ContourLineFile(string FileName) 
+\end{lstlisting}
+\item 创建shp文件对应的基本属性表
+\begin{lstlisting}
+private IFields CreateShapeFields(esriGeometryType p_esriGeotype)
+\end{lstlisting}
+\item 创建shp文件
+\begin{lstlisting}
+private IFeatureLayer CreateSHP_Point(List<Point3D> PointList, string FileFullPath)
+\end{lstlisting}
+\item 根据高程点的信息建立完整属性表
+\begin{lstlisting}
+private void Complete_PropertyTable(ref IFeatureClass  pFeatureClass,List<Point3D> PointList)
+\end{lstlisting}
+\item 显示属性表
+\begin{lstlisting}
+private void Display_PropertyTable(IFeatureLayer pFeatureLayer)
+\end{lstlisting}
+\item 打开原始测量文件
+\begin{lstlisting}
+private void 原始测量文件ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\end{enumerate}
+\end{enumerate}
+\subsection{建立TIN}
+\begin{enumerate}
+\item 实现的功能\\
+由shp文件中的数据建立TIN
+\item 主要的接口\\
+IWorkspaceFactory ,IFeatureWorkspace,ITin,ITinEdit
+\item 函数\\
+\begin{enumerate}
+\item TIN生成函数
+\begin{lstlisting} 
+private ITin Create_TIN(IFeatureClass pFeatureClass, IField pField) 
+\end{lstlisting}
+\item 建立TIN
+\begin{lstlisting}
+private void 建立TINToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\end{enumerate}
+\end{enumerate}
+\subsection{生成等高线}
+\begin{enumerate}
+\item 实现的功能\\
+根据TIN生成等高线（polyline类型的shapefile）
+\item 主要接口\\
+IWorkspaceFactory,IFeatureWorkspace,IFeatureClass,ITinSurface
+\item 函数
+\begin{enumerate}
+\item 等高线生成函数
+\begin{lstlisting}
+private IFeatureClass Create_ContourLine(ITin pTin,string WorkSpaceName,string FileName)   
+\end{lstlisting}
+\item 建立TIN
+\begin{lstlisting}
+private void 建立TINToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\end{enumerate}
+\end{enumerate}
+\subsection{测区面积量算}
+\begin{enumerate}
+\item 实现的功能\\
+量测区域的面积（已测得的等高线覆盖的面积）。通过对高程点建立凸包，计算大约的量测面积。
+\item 主要接口\\IWorkspaceFactory ,IFeatureWorkspace,IFeatureClass，
+ITopologicalOperator（建立凸包），IArea（获取面积）
+\item 函数
+\begin{enumerate}
+\item 将Point类型的pfeature转为MultiPoint,为建立凸包做准备
+\begin{lstlisting}
+private IFeature Convert_Point2MultiPoint(IFeatureClass PointFeatureClass)
+\end{lstlisting}
+\item 计算测区范围
+\begin{lstlisting}
+private void 计算测区范围ToolStripMenuItem_Click(object sender, EventArgs e)
+\end{lstlisting}
+\end{enumerate}
+\end{enumerate}
+
+
 
 \chapter{小组合作}
 
@@ -265,10 +466,11 @@ git本地的操作如图所示\ref{fig:desktop}所示
 \centering
 \caption{文件}
 \begin{tabular}{p{3cm}p{7cm}}
-   项目文件 & ArcEngineProgram/ArcEngineProgram.sln  \\
-    源代码 & ArcEngineProgram/ArcEngineProgram/*.cs \\
-    编译好的程序 & ArcEngineProgram/ArcEngineProgram/bin/Debug/ArcEngineProgram \\
-    说明文件 & document.tex,document.pdf
+项目文件 & ArcEngineProgram/ArcEngineProgram.sln  \\
+源代码 & ArcEngineProgram/ArcEngineProgram/*.cs \\
+编译好的程序 & ArcEngineProgram/ArcEngineProgram/bin/Debug/ArcEngineProgram \\
+说明文件 & document.tex,document.pdf \\
+数据 & gis/pointt.shp,polygon.shp,高程数据/CL05.pnt 
 \end{tabular}
 \end{table}
 
